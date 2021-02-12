@@ -1,5 +1,7 @@
+import store from '.././index'
+
 class Todo{
-    constructor (title,description,dueDate,priority,) {
+    constructor (title,description,dueDate,priority) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -15,8 +17,14 @@ class Todo{
         `)
     }
 
+    storeTodo(){
+      store[0].todos.push('hello');
+      console.log(store[0].todos);
+    }
+
     renderTodo(){
         this.todoContent.insertAdjacentHTML("afterbegin",this.showContent);
+        this.storeTodo();
     }
 }
 

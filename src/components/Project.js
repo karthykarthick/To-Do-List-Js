@@ -1,4 +1,5 @@
 import store from '.././index'
+import Todo from '../components/Todos'
 
 class Project {
   constructor(projectName) {
@@ -20,10 +21,12 @@ class Project {
     })
   }
 
+  
+
   renderProject() {
     this.projectContent.insertAdjacentHTML('afterbegin', this.showName)
     this.storeProjectName()
-    console.log(store)
+    console.log(store);
   }
 
 }
