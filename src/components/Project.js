@@ -1,38 +1,36 @@
-import store from '.././index';
-import Todo from '../components/Todos';
-import {setLocalStorage, populateStore} from './storage';
+import store from ".././index";
+import Todo from "../components/Todos";
+import { setLocalStorage, populateStore } from "./storage";
 
 class Project {
   constructor(projectName) {
     this.projectName = projectName;
-    this.projectContent = document.querySelector('.project-content')
+    this.projectContent = document.querySelector(".project-content");
   }
 
   get showName() {
-    return  `
-              <li class="project">${this.projectName}</li>
-            ` 
+    return `
+              <li class="project list-group-item">${this.projectName}</li>
+            `;
   }
 
-
+ deleteProject () {
+   
+ }
 
   storeProjectName() {
     store.push({
       projectName: `${this.projectName}`,
       id: store.length,
-      todos: []
-    })
-    
+      todos: [],
+    });
   }
-
-  
 
   renderProject() {
-    this.projectContent.insertAdjacentHTML('afterbegin', this.showName)
-    this.storeProjectName()
+    this.projectContent.insertAdjacentHTML("afterbegin", this.showName);
+    this.storeProjectName();
     setLocalStorage();
   }
-
 }
 
-export default Project
+export default Project;

@@ -10,7 +10,10 @@ export default class Ui {
   renderUi() { 
     populateStore()
     store.forEach(project => {
-      const li = `<li class="project" id="${project.id}">${project.projectName}</li>`
+      const li = `<li class="project list-group-item"  id="${project.id}">${project.projectName}
+      <i class="fa fa-plus float-right addTodo" aria-hidden="true"></i>
+      <i class="fas fa-times float-right mr-4 deleteProject" aria-hidden="true"></i>
+      </li>`
       this.projectContent.insertAdjacentHTML('afterbegin', li)
     })
     

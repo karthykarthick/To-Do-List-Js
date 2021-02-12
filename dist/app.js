@@ -34,37 +34,36 @@ __webpack_require__.r(__webpack_exports__);
 class Project {
   constructor(projectName) {
     this.projectName = projectName;
-    this.projectContent = document.querySelector('.project-content')
+    this.projectContent = document.querySelector(".project-content");
   }
 
   get showName() {
-    return  `
-              <li class="project">${this.projectName}</li>
-            ` 
+    return `
+              <li class="project list-group-item">${this.projectName}</li>
+            `;
   }
 
-
+ deleteProject () {
+   
+ }
 
   storeProjectName() {
     _index__WEBPACK_IMPORTED_MODULE_0__.default.push({
       projectName: `${this.projectName}`,
       id: _index__WEBPACK_IMPORTED_MODULE_0__.default.length,
-      todos: []
-    })
-    
+      todos: [],
+    });
   }
-
-  
 
   renderProject() {
-    this.projectContent.insertAdjacentHTML('afterbegin', this.showName)
-    this.storeProjectName()
-    ;(0,_storage__WEBPACK_IMPORTED_MODULE_2__.setLocalStorage)();
+    this.projectContent.insertAdjacentHTML("afterbegin", this.showName);
+    this.storeProjectName();
+    (0,_storage__WEBPACK_IMPORTED_MODULE_2__.setLocalStorage)();
   }
-
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Project);
+
 
 /***/ }),
 
@@ -145,7 +144,10 @@ class Ui {
   renderUi() { 
     (0,_storage__WEBPACK_IMPORTED_MODULE_1__.populateStore)()
     _index__WEBPACK_IMPORTED_MODULE_0__.default.forEach(project => {
-      const li = `<li class="project" id="${project.id}">${project.projectName}</li>`
+      const li = `<li class="project list-group-item"  id="${project.id}">${project.projectName}
+      <i class="fa fa-plus float-right addTodo" aria-hidden="true"></i>
+      <i class="fas fa-times float-right mr-4 deleteProject" aria-hidden="true"></i>
+      </li>`
       this.projectContent.insertAdjacentHTML('afterbegin', li)
     })
     
