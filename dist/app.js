@@ -59,6 +59,42 @@ class Project {
 
 /***/ }),
 
+/***/ "./src/components/Todos.js":
+/*!*********************************!*\
+  !*** ./src/components/Todos.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+class Todo{
+    constructor (title,description,dueDate,priority,) {
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.todoContent = document.querySelector('.todos-content');
+    }
+
+    get showContent(){
+        return (` <h1>${this.title}</h1>
+          <p>${this.description}</p>
+          <p>${this.dueDate}</p>
+          <p>${this.priority}</p>
+        `)
+    }
+
+    renderTodo(){
+        this.todoContent.insertAdjacentHTML("afterbegin",this.showContent);
+    }
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Todo);
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -71,6 +107,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/styles.scss */ "./src/scss/styles.scss");
 /* harmony import */ var _components_Project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Project */ "./src/components/Project.js");
+/* harmony import */ var _components_Todos__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Todos */ "./src/components/Todos.js");
+
 
 
 
@@ -84,6 +122,16 @@ data.addEventListener("click", (e) => {
   newProject.renderProject();
 });
 
+const todoBtm = document.querySelector(".hitme");
+todoBtm.addEventListener("click",(e) =>{
+    e.preventDefault();
+    const title = document.querySelector('.todo-title').value;
+    const description = document.querySelector(".todo-description").value;
+    const dueDate = document.querySelector('.todo-due-date').value;
+    const priority = document.querySelector('#priority').value;
+    const todo = new _components_Todos__WEBPACK_IMPORTED_MODULE_2__.default(title,description,dueDate,priority);
+    todo.renderTodo();
+} )
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 /***/ })
