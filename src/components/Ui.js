@@ -20,7 +20,7 @@ export default class Ui {
           if(obj.projectName == deleteBtn.dataset.name) {
             store.splice(idx, 1)
             setLocalStorage()
-            this.removeChildDOM(deleteBtn.dataset.name)
+            this.removeChildDOM((deleteBtn.dataset.name).split(' ').join(''))
           }
         })
       })
@@ -32,7 +32,7 @@ export default class Ui {
   renderUi() { 
     populateStore()
     store.forEach(project => {
-      const li = `<li class="project list-group-item"  id="${project.projectName}">${project.projectName}
+      const li = `<li class="project list-group-item"  id="${project.projectName.split(' ').join('')}">${project.projectName}
       <i class="fa fa-plus float-right addTodo" aria-hidden="true"></i>
       <i class="fas fa-times float-right mr-4 deleteProject" aria-hidden="true" data-name="${project.projectName}"></i>
       </li>`

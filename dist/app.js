@@ -149,7 +149,7 @@ class Ui {
           if(obj.projectName == deleteBtn.dataset.name) {
             _index__WEBPACK_IMPORTED_MODULE_0__.default.splice(idx, 1)
             ;(0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)()
-            this.removeChildDOM(deleteBtn.dataset.name)
+            this.removeChildDOM((deleteBtn.dataset.name).split(' ').join(''))
           }
         })
       })
@@ -161,7 +161,7 @@ class Ui {
   renderUi() { 
     (0,_storage__WEBPACK_IMPORTED_MODULE_1__.populateStore)()
     _index__WEBPACK_IMPORTED_MODULE_0__.default.forEach(project => {
-      const li = `<li class="project list-group-item"  id="${project.projectName}">${project.projectName}
+      const li = `<li class="project list-group-item"  id="${project.projectName.split(' ').join('')}">${project.projectName}
       <i class="fa fa-plus float-right addTodo" aria-hidden="true"></i>
       <i class="fas fa-times float-right mr-4 deleteProject" aria-hidden="true" data-name="${project.projectName}"></i>
       </li>`
