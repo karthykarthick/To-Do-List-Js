@@ -1,8 +1,10 @@
 import "./scss/styles.scss";
 import Project from './components/Project';
 import Todo from './components/Todos';
+import Ui from './components/Ui';
 
-const store = []
+const store = [
+]
 
 const data = document.querySelector(".submit-btn");
 data.addEventListener("click", (e) => {
@@ -10,6 +12,7 @@ data.addEventListener("click", (e) => {
   const ProjectTitle = document.querySelector("input").value;
   const newProject = new Project(ProjectTitle);
   newProject.renderProject();
+  checkProject();
 });
 
 const todoBtm = document.querySelector(".hitme");
@@ -22,4 +25,23 @@ todoBtm.addEventListener("click",(e) =>{
     const todo = new Todo(title,description,dueDate,priority);
     todo.renderTodo();
 } )
+
+
+document.addEventListener("DOMContentLoaded", e => {
+    const UI = new Ui()
+    UI.renderUi()
+    checkProject()
+  })
+  
+const checkProject = () => {
+  const projects = document.querySelectorAll('.project')
+  console.log(projects)
+  projects.forEach(pj => {
+    pj.addEventListener('click', e => {
+        console.log(e.target)
+      })
+    })
+}
+
+
 export default store;

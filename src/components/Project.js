@@ -1,5 +1,6 @@
-import store from '.././index'
-import Todo from '../components/Todos'
+import store from '.././index';
+import Todo from '../components/Todos';
+import {setLocalStorage} from './storage';
 
 class Project {
   constructor(projectName) {
@@ -9,9 +10,19 @@ class Project {
 
   get showName() {
     return  `
-              <li>${this.projectName}</li>
+              <li class="project">${this.projectName}</li>
             `
   }
+
+  // listenProject() {
+  //   populateStore();
+  //   const projects = document.querySelectorAll('.project');
+  //   projects.forEach(pj => {
+  //     pj.addEventListener('click', e => {
+  //       console.log(e.target)
+  //     })
+  //   })
+  // }
 
   storeProjectName() {
     store.push({
@@ -19,6 +30,7 @@ class Project {
       id: store.length,
       todos: []
     })
+    
   }
 
   
@@ -26,7 +38,7 @@ class Project {
   renderProject() {
     this.projectContent.insertAdjacentHTML('afterbegin', this.showName)
     this.storeProjectName()
-    console.log(store);
+    setLocalStorage()
   }
 
 }
