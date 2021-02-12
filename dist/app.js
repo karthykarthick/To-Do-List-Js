@@ -40,18 +40,10 @@ class Project {
   get showName() {
     return  `
               <li class="project">${this.projectName}</li>
-            `
+            ` 
   }
 
-  // listenProject() {
-  //   populateStore();
-  //   const projects = document.querySelectorAll('.project');
-  //   projects.forEach(pj => {
-  //     pj.addEventListener('click', e => {
-  //       console.log(e.target)
-  //     })
-  //   })
-  // }
+
 
   storeProjectName() {
     _index__WEBPACK_IMPORTED_MODULE_0__.default.push({
@@ -67,7 +59,7 @@ class Project {
   renderProject() {
     this.projectContent.insertAdjacentHTML('afterbegin', this.showName)
     this.storeProjectName()
-    ;(0,_storage__WEBPACK_IMPORTED_MODULE_2__.setLocalStorage)()
+    ;(0,_storage__WEBPACK_IMPORTED_MODULE_2__.setLocalStorage)();
   }
 
 }
@@ -90,12 +82,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Todo{
-    constructor (title,description,dueDate,priority) {
+    constructor (title,description,dueDate,priority, idx) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.todoContent = document.querySelector('.todos-content');
+    this.index = idx
     }
 
     get showContent(){
@@ -107,8 +100,14 @@ class Todo{
     }
 
     storeTodo(){
-      _index__WEBPACK_IMPORTED_MODULE_0__.default[0].todos.push('hello');
-      console.log(_index__WEBPACK_IMPORTED_MODULE_0__.default[0].todos);
+      console.log(this.index)
+      _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.push({
+        title: this.title,
+        description: this.description,
+        dueDate: this.dueDate,
+        priority: this.priority
+      });
+      console.log(_index__WEBPACK_IMPORTED_MODULE_0__.default[this.index]);
     }
 
     renderTodo(){
@@ -129,10 +128,12 @@ class Todo{
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ Ui)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././index */ "./src/index.js");
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
+/* harmony import */ var _Todos__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Todos */ "./src/components/Todos.js");
+
 
 
 
@@ -143,16 +144,15 @@ class Ui {
 
   renderUi() { 
     (0,_storage__WEBPACK_IMPORTED_MODULE_1__.populateStore)()
-    console.log.store
     _index__WEBPACK_IMPORTED_MODULE_0__.default.forEach(project => {
-      const li = `<li class="project">${project.projectName}</li>`
+      const li = `<li class="project" id="${project.id}">${project.projectName}</li>`
       this.projectContent.insertAdjacentHTML('afterbegin', li)
     })
+    
   }
 
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Ui);
 
 /***/ }),
 
@@ -207,13 +207,14 @@ __webpack_require__.r(__webpack_exports__);
 const store = [
 ]
 
+let projectIdx = 0
+
 const data = document.querySelector(".submit-btn");
 data.addEventListener("click", (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   const ProjectTitle = document.querySelector("input").value;
   const newProject = new _components_Project__WEBPACK_IMPORTED_MODULE_1__.default(ProjectTitle);
   newProject.renderProject();
-  checkProject();
 });
 
 const todoBtm = document.querySelector(".hitme");
@@ -223,23 +224,24 @@ todoBtm.addEventListener("click",(e) =>{
     const description = document.querySelector(".todo-description").value;
     const dueDate = document.querySelector('.todo-due-date').value;
     const priority = document.querySelector('#priority').value;
-    const todo = new _components_Todos__WEBPACK_IMPORTED_MODULE_2__.default(title,description,dueDate,priority);
+    console.log(projectIdx)
+    const todo = new _components_Todos__WEBPACK_IMPORTED_MODULE_2__.default(title,description,dueDate,priority, projectIdx);
     todo.renderTodo();
 } )
 
 
 document.addEventListener("DOMContentLoaded", e => {
-    const UI = new _components_Ui__WEBPACK_IMPORTED_MODULE_3__.default()
+  const UI = new _components_Ui__WEBPACK_IMPORTED_MODULE_3__.default()
     UI.renderUi()
     checkProject()
-  })
+})
   
 const checkProject = () => {
-  const projects = document.querySelectorAll('.project')
-  console.log(projects)
+  const projects = [...document.querySelectorAll('.project')]
   projects.forEach(pj => {
     pj.addEventListener('click', e => {
-        console.log(e.target)
+      projectIdx = e.target.id
+      console.log(projectIdx)
       })
     })
 }

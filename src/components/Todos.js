@@ -1,12 +1,13 @@
 import store from '.././index'
 
 class Todo{
-    constructor (title,description,dueDate,priority) {
+    constructor (title,description,dueDate,priority, idx) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
     this.todoContent = document.querySelector('.todos-content');
+    this.index = idx
     }
 
     get showContent(){
@@ -18,8 +19,14 @@ class Todo{
     }
 
     storeTodo(){
-      store[0].todos.push('hello');
-      console.log(store[0].todos);
+      console.log(this.index)
+      store[this.index].todos.push({
+        title: this.title,
+        description: this.description,
+        dueDate: this.dueDate,
+        priority: this.priority
+      });
+      console.log(store[this.index]);
     }
 
     renderTodo(){
