@@ -23,7 +23,6 @@ todoBtm.addEventListener("click",(e) =>{
     const description = document.querySelector(".todo-description").value;
     const dueDate = document.querySelector('.todo-due-date').value;
     const priority = document.querySelector('#priority').value;
-    console.log(projectIdx)
     const todo = new Todo(title,description,dueDate,priority, projectIdx);
     todo.renderTodo();
 } )
@@ -33,6 +32,8 @@ document.addEventListener("DOMContentLoaded", e => {
   const UI = new Ui()
     UI.renderUi()
     checkProject()
+    UI.deleteProject()
+    console.log(store)
 })
   
 const checkProject = () => {
@@ -44,6 +45,7 @@ const checkProject = () => {
       })
     })
 }
+
 
 
 export default store;

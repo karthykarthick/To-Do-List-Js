@@ -6,9 +6,11 @@ const setLocalStorage = () => {
 
 const populateStore = () => {
   const colletion = JSON.parse(window.localStorage.getItem('todos'))
-  colletion.forEach(el => {
-    store.push(el)
-  });
+  if(colletion) {
+    colletion.forEach(el => {
+      store.push(el)
+    });
+  }
 }
 
 export {setLocalStorage, populateStore}

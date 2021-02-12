@@ -25,9 +25,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././index */ "./src/index.js");
-/* harmony import */ var _components_Todos__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Todos */ "./src/components/Todos.js");
-/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
-
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
 
 
 
@@ -43,9 +41,6 @@ class Project {
             `;
   }
 
- deleteProject () {
-   
- }
 
   storeProjectName() {
     _index__WEBPACK_IMPORTED_MODULE_0__.default.push({
@@ -58,7 +53,7 @@ class Project {
   renderProject() {
     this.projectContent.insertAdjacentHTML("afterbegin", this.showName);
     this.storeProjectName();
-    (0,_storage__WEBPACK_IMPORTED_MODULE_2__.setLocalStorage)();
+    (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
   }
 }
 
@@ -141,20 +136,48 @@ class Ui {
     this.projectContent = document.querySelector('.project-content')
   }
 
+  removeChildDOM(idx) {
+    const child = document.querySelector(`#${idx}`);
+    child.remove()
+  }
+
+  deleteProject() {
+    const deleteBtns = document.querySelectorAll('.deleteProject')
+    deleteBtns.forEach(deleteBtn => {
+      deleteBtn.addEventListener('click', () => {
+        _index__WEBPACK_IMPORTED_MODULE_0__.default.some((obj, idx) => {
+          if(obj.projectName == deleteBtn.dataset.name) {
+            _index__WEBPACK_IMPORTED_MODULE_0__.default.splice(idx, 1)
+            ;(0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)()
+            this.removeChildDOM(deleteBtn.dataset.name)
+          }
+        })
+      })
+    })
+  }
+
+  
+
   renderUi() { 
     (0,_storage__WEBPACK_IMPORTED_MODULE_1__.populateStore)()
     _index__WEBPACK_IMPORTED_MODULE_0__.default.forEach(project => {
-      const li = `<li class="project list-group-item"  id="${project.id}">${project.projectName}
+      const li = `<li class="project list-group-item"  id="${project.projectName}">${project.projectName}
       <i class="fa fa-plus float-right addTodo" aria-hidden="true"></i>
-      <i class="fas fa-times float-right mr-4 deleteProject" aria-hidden="true"></i>
+      <i class="fas fa-times float-right mr-4 deleteProject" aria-hidden="true" data-name="${project.projectName}"></i>
       </li>`
       this.projectContent.insertAdjacentHTML('afterbegin', li)
+   
     })
     
   }
 
 }
 
+// arr.some((el,idx) =>{ 
+//   if(el.title == 'title2') {
+//       index = idx
+//   }
+// })
 
 /***/ }),
 
@@ -178,9 +201,11 @@ const setLocalStorage = () => {
 
 const populateStore = () => {
   const colletion = JSON.parse(window.localStorage.getItem('todos'))
-  colletion.forEach(el => {
-    _index__WEBPACK_IMPORTED_MODULE_0__.default.push(el)
-  });
+  if(colletion) {
+    colletion.forEach(el => {
+      _index__WEBPACK_IMPORTED_MODULE_0__.default.push(el)
+    });
+  }
 }
 
 
@@ -226,7 +251,6 @@ todoBtm.addEventListener("click",(e) =>{
     const description = document.querySelector(".todo-description").value;
     const dueDate = document.querySelector('.todo-due-date').value;
     const priority = document.querySelector('#priority').value;
-    console.log(projectIdx)
     const todo = new _components_Todos__WEBPACK_IMPORTED_MODULE_2__.default(title,description,dueDate,priority, projectIdx);
     todo.renderTodo();
 } )
@@ -236,6 +260,8 @@ document.addEventListener("DOMContentLoaded", e => {
   const UI = new _components_Ui__WEBPACK_IMPORTED_MODULE_3__.default()
     UI.renderUi()
     checkProject()
+    UI.deleteProject()
+    console.log(store)
 })
   
 const checkProject = () => {
@@ -247,6 +273,7 @@ const checkProject = () => {
       })
     })
 }
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);

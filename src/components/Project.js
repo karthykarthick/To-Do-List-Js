@@ -1,5 +1,4 @@
 import store from ".././index";
-import Todo from "../components/Todos";
 import { setLocalStorage, populateStore } from "./storage";
 
 class Project {
@@ -14,9 +13,6 @@ class Project {
             `;
   }
 
- deleteProject () {
-   
- }
 
   storeProjectName() {
     store.push({
