@@ -1,8 +1,14 @@
 import "./scss/styles.scss";
+import Project from './components/Project';
+
+const store = []
+
 const data = document.querySelector(".submit-btn");
 data.addEventListener("click", (e) => {
   e.preventDefault();
-  const ProjecTitle = document.querySelector("input").value;
-  console.log(ProjecTitle);
-  console.log(e, data);
+  const ProjectTitle = document.querySelector("input").value;
+  const newProject = new Project(ProjectTitle);
+  newProject.renderProject();
 });
+
+export default store;

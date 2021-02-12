@@ -14,6 +14,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/components/Project.js":
+/*!***********************************!*\
+  !*** ./src/components/Project.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././index */ "./src/index.js");
+
+
+class Project {
+  constructor(projectName) {
+    this.projectName = projectName;
+    this.projectContent = document.querySelector('.project-content')
+  }
+
+  get showName() {
+    return  `
+              <li>${this.projectName}</li>
+            `
+  }
+
+  storeProjectName() {
+    _index__WEBPACK_IMPORTED_MODULE_0__.default.push({
+      projectName: `${this.projectName}`,
+      id: _index__WEBPACK_IMPORTED_MODULE_0__.default.length,
+      todos: []
+    })
+  }
+
+  renderProject() {
+    this.projectContent.insertAdjacentHTML('afterbegin', this.showName)
+    this.storeProjectName()
+    console.log(_index__WEBPACK_IMPORTED_MODULE_0__.default)
+  }
+
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Project);
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -21,16 +66,25 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./scss/styles.scss */ "./src/scss/styles.scss");
+/* harmony import */ var _components_Project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/Project */ "./src/components/Project.js");
+
+
+
+const store = []
 
 const data = document.querySelector(".submit-btn");
 data.addEventListener("click", (e) => {
   e.preventDefault();
-  const ProjecTitle = document.querySelector("input").value;
-  console.log(ProjecTitle);
-  console.log(e, data);
+  const ProjectTitle = document.querySelector("input").value;
+  const newProject = new _components_Project__WEBPACK_IMPORTED_MODULE_1__.default(ProjectTitle);
+  newProject.renderProject();
 });
 
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
 
 /***/ })
 
@@ -60,6 +114,23 @@ data.addEventListener("click", (e) => {
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -74,8 +145,8 @@ data.addEventListener("click", (e) => {
 /************************************************************************/
 /******/ 	// startup
 /******/ 	// Load entry module
+/******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	__webpack_require__("./src/index.js");
-/******/ 	// This entry module used 'exports' so it can't be inlined
 /******/ })()
 ;
 //# sourceMappingURL=app.js.map

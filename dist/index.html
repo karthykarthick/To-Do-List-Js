@@ -7,16 +7,37 @@
     <title>Ever Note</title>
   <script defer src="app.js"></script><link href="./css/styles.css" rel="stylesheet"></head>
   <body>
-    <center><h1>Ever Note</h1></center>
-    <form action="">
-      <label for="list"></label>
-      <input type="text" id="list" />
-      <button class="submit-btn">Submit</button>
-    </form>
-    <div class="content">
-      <div class="project-Title">
-        
-      </div>
+    <aside>
+      <center><h1>Ever Note</h1></center>
+      <form action="">
+        <label for="list"></label>
+        <input type="text" id="list" />
+        <button class="submit-btn">Submit</button>
+      </form>
+      <ul class="project-content">
+      </ul>
+    </aside>
+    <div class="todo-form">
+      <form action="">
+        <label>Title
+          <input type="text" class="todo-title">
+        </label>
+        <label>Description
+          <input type="text" class="todo-description">
+        </label>
+        <label>Due date
+          <input type="text" class="todo-due-date">
+        </label>
+        <label>priority
+          <select name="priority" id="">
+            <option value="high">High</option>
+            <option value="medium">medium</option>
+            <option value="low">low</option>
+          </select>
+        </label>
+      </form>
+    </div>
+    <div class="todos-content">
     </div>
   </body>
 </html>
