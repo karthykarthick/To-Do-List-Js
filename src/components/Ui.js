@@ -49,7 +49,7 @@ export default class Ui {
     this.todosConent.innerHTML = '';
     store[projectIdx].todos.forEach(todo => {
       const todoCard = `
-      <div class="card border-primary  row">
+      <div class="card border-primary  row" id="${sanitizeName(todo.title)}">
         <div class="card-body col-8">
           <ul class="list-group list-group-flush">
             <h1 class="list-group-item">Title:  ${todo.title}</h1>
@@ -57,14 +57,16 @@ export default class Ui {
             <li class="list-group-item">Due_date:  ${todo.dueDate}</li>
             <li class="list-group-item">priority: ${todo.priority}</li>
           </ul>
-          <button class="btn btn-outline-danger del-data" data-name="${this.title}">Delete</button>
+          <button class="btn btn-outline-danger del-data" data-name="${todo.title}">Delete</button>
+          <button class="btn btn-outline-success complete-btn" data-sucess="${todo.title}">Completed task</button>
         </div>
       </div>
         `
       this.todosConent.insertAdjacentHTML('afterbegin', todoCard)
-      const todos = new Todo();
-      todos.deleteButton()
+      // todos.completedTask()
     })
+    const todos = new Todo();
+    todos.deleteButton()
   }
 
   deleteProject() {
@@ -92,7 +94,7 @@ export default class Ui {
       <i class="fas fa-times float-right mr-4 deleteProject" aria-hidden="true" data-name="${project.projectName}"></i>
       </li>`
       this.projectContent.insertAdjacentHTML('afterbegin', li)
-   
+     
     })
     
   }

@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", e => {
     UI.deleteProject()
     UI.addBtn()
     UI.showTodos()
-  
+    // const todos = new Todo();
+    // todos.deleteButton()
 })
   
 // const checkProject = () => {

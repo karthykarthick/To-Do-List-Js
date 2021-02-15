@@ -28,20 +28,20 @@ class Todo {
         `;
   }
 
-deleteButton(){
-  const data = document.querySelectorAll(".del-data");
-  data.forEach(btn => {
-    btn.addEventListener("click",e=>{
-    let try1 = store[this.index].todos.findIndex(tv=>tv.title==e.target.dataset.name) ;
-    this.removeChildDOM(sanitizeName(e.target.dataset.name));
-    store[this.index].todos.splice(try1,1);
-    setLocalStorage();
+  deleteButton(){
+    const data = document.querySelectorAll(".del-data");
+    data.forEach(btn => {
+      btn.addEventListener("click", e => {
+        const idxToDelete = store[this.index].todos.findIndex(td => td.title === e.target.dataset.name)
+      this.removeChildDOM(sanitizeName(e.target.dataset.name));
+      store[this.index].todos.splice(idxToDelete,1);
+      setLocalStorage();
+      })
     })
-  })
-  
-}
+    
+  }
 
- removeChildDOM(idx) {
+  removeChildDOM(idx) {
     const child = document.querySelector(`#${idx}`);
     child.remove()
   }
@@ -61,7 +61,7 @@ deleteButton(){
   renderTodo() {
     this.todoContent.insertAdjacentHTML("afterbegin", this.showContent);
     this.storeTodo();
-    this.deleteButton();
+    // this.deleteButton();
   }
 }
 
