@@ -8,7 +8,7 @@
 
 ## Live Demo:
 
-[Live Demo Link](https://boring-golick-b9060d.netlify.app)
+[Live Demo Link](https://boring-todo-lists.netlify.app/)
 
 ##  Built with
 
