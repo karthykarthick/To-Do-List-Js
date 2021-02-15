@@ -1,6 +1,6 @@
 import store from '.././index';
-import projectIdx from './Ui';
 import { setLocalStorage } from './storage';
+import { projectIdx } from './Ui';
 
 class Todo{
     constructor (title,description,dueDate,priority, idx) {

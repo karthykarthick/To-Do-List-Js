@@ -73,8 +73,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././index */ "./src/index.js");
-/* harmony import */ var _Ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ui */ "./src/components/Ui.js");
-/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
+/* harmony import */ var _Ui__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Ui */ "./src/components/Ui.js");
 
 
 
@@ -86,7 +86,7 @@ class Todo{
     this.dueDate = dueDate;
     this.priority = priority;
     this.todoContent = document.querySelector('.todos-content');
-    this.index = _Ui__WEBPACK_IMPORTED_MODULE_1__.default
+    this.index = _Ui__WEBPACK_IMPORTED_MODULE_2__.projectIdx
     }
 
     get showContent(){
@@ -105,7 +105,7 @@ class Todo{
         dueDate: this.dueDate,
         priority: this.priority
       });
-      (0,_storage__WEBPACK_IMPORTED_MODULE_2__.setLocalStorage)()
+      (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)()
     }
 
     renderTodo(){
@@ -126,6 +126,7 @@ class Todo{
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "projectIdx": () => (/* binding */ projectIdx),
 /* harmony export */   "default": () => (/* binding */ Ui)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././index */ "./src/index.js");
@@ -155,12 +156,9 @@ class Ui {
     addBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         todoForm.classList.remove('d-none');
-        _index__WEBPACK_IMPORTED_MODULE_0__.default.findIndex((pj, idx) => {
-          if (pj.projectName == e.target.dataset.name) projectIdx = idx;
+        _index__WEBPACK_IMPORTED_MODULE_0__.default.findIndex(pj => pj.projectName == e.target.dataset.name);
         })
-        console.log(projectIdx)
       })
-    })
   }
 
   showTodos() {
@@ -181,6 +179,7 @@ class Ui {
 
   displayTodos() {
     this.todosConent.innerHTML = '';
+    console.log('hello')
     _index__WEBPACK_IMPORTED_MODULE_0__.default[projectIdx].todos.forEach(todo => {
       const todoCard = ` <h1>${todo.title}</h1>
           <p>${todo.description}</p>

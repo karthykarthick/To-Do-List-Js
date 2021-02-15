@@ -2,7 +2,7 @@ import store from '.././index';
 import { populateStore, setLocalStorage } from './storage';
 import Todo from './Todos';
 
-let projectIdx = 0
+export let projectIdx = 0
 
 export default class Ui {
   constructor() {
@@ -22,12 +22,9 @@ export default class Ui {
     addBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         todoForm.classList.remove('d-none');
-        store.findIndex((pj, idx) => {
-          if (pj.projectName == e.target.dataset.name) projectIdx = idx;
+        store.findIndex(pj => pj.projectName == e.target.dataset.name);
         })
-        console.log(projectIdx)
       })
-    })
   }
 
   showTodos() {
@@ -48,6 +45,7 @@ export default class Ui {
 
   displayTodos() {
     this.todosConent.innerHTML = '';
+    console.log('hello')
     store[projectIdx].todos.forEach(todo => {
       const todoCard = ` <h1>${todo.title}</h1>
           <p>${todo.description}</p>
