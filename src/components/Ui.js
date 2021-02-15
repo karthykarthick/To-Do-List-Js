@@ -41,8 +41,7 @@ export default class Ui {
 
   showTodos() {
     const projects = document.querySelectorAll('.project');
-    
-    
+
 
     projects.forEach(project => {
       project.addEventListener('click', e => {
@@ -81,7 +80,7 @@ export default class Ui {
     const todos = new Todo();
     todos.deleteButton();
     todos.completedTask();
-    todos.editTask()
+    todos.editTask();
   }
 
   deleteProject() {

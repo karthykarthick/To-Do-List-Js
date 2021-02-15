@@ -1,5 +1,6 @@
 {
-  "name": "webpackTemplate",
+  "homepage": "https://github.com/karthykarthick/To-Do-List-Js",
+  "name": "To-do list",
   "version": "1.0.0",
   "description": "This is a template for webpack",
   "main": "index.js",
