@@ -36,32 +36,34 @@ export default class Ui {
         store.findIndex((pj, index) => {
           if(sanitizeName(pj.projectName) === e.target.id) {
             projectIdx = index;
-            console.log(projectIdx)
             this.displayTodos()
+
           }
         })
       })
+      
     })
   }
 
   displayTodos() {
     this.todosConent.innerHTML = '';
-    console.log('hello')
     store[projectIdx].todos.forEach(todo => {
       const todoCard = `
       <div class="card border-primary  row">
-      <div class="card-body col-8">
-      <ul class="list-group list-group-flush">
-      <h1 class="list-group-item">Title:  ${todo.title}</h1>
-      <li class="list-group-item">Description:  ${todo.description}</li>
-      <li class="list-group-item">Due_date:  ${todo.dueDate}</li>
-      <li class="list-group-item">priority: ${todo.priority}</li>
-      </ul>
-      <button class="btn btn-outline-danger ">Delete</button>
-       </div>
-       </div>
+        <div class="card-body col-8">
+          <ul class="list-group list-group-flush">
+            <h1 class="list-group-item">Title:  ${todo.title}</h1>
+            <li class="list-group-item">Description:  ${todo.description}</li>
+            <li class="list-group-item">Due_date:  ${todo.dueDate}</li>
+            <li class="list-group-item">priority: ${todo.priority}</li>
+          </ul>
+          <button class="btn btn-outline-danger del-data" data-name="${this.title}">Delete</button>
+        </div>
+      </div>
         `
       this.todosConent.insertAdjacentHTML('afterbegin', todoCard)
+      const todos = new Todo();
+      todos.deleteButton()
     })
   }
 

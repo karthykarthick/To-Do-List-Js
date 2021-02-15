@@ -91,17 +91,17 @@ class Todo {
 
   get showContent() {
     return `
-         <div class="card border-primary row" id="${(0,_Ui__WEBPACK_IMPORTED_MODULE_2__.sanitizeName)(this.title)}">
-         <div class="card-body col-8">
-         <ul class="list-group list-group-flush">
-         <h1 class="list-group-item">Title: ${this.title}</h1>
-         <li class="list-group-item">Description: ${this.description}</li>
-         <li class="list-group-item">Due_Date: ${this.dueDate}</li>
-         <li class="list-group-item">Priority: ${this.priority}</li>
-         </ul>
-         <button class="btn btn-outline-danger del-data" data-name="${this.title}">Delete</button>
-          </div>
-          </div>
+      <div class="card border-primary row" id="${(0,_Ui__WEBPACK_IMPORTED_MODULE_2__.sanitizeName)(this.title)}">
+        <div class="card-body col-8">
+          <ul class="list-group list-group-flush">
+            <h1 class="list-group-item">Title: ${this.title}</h1>
+            <li class="list-group-item">Description: ${this.description}</li>
+            <li class="list-group-item">Due_Date: ${this.dueDate}</li>
+            <li class="list-group-item">Priority: ${this.priority}</li>
+          </ul>
+          <button class="btn btn-outline-danger del-data" data-name="${this.title}">Delete</button>
+        </div>
+      </div>
         `;
   }
 
@@ -109,16 +109,13 @@ deleteButton(){
   const data = document.querySelectorAll(".del-data");
   data.forEach(btn => {
     btn.addEventListener("click",e=>{
-     var try1 = _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.findIndex(tv=>tv.title==e.target.dataset.name) ;
-     _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.splice(try1,1);
-     (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
-     this.removeChildDOM((0,_Ui__WEBPACK_IMPORTED_MODULE_2__.sanitizeName)(e.target.dataset.name));
-     console.log(try1);
-      console.log(_index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos);
-      console.log(e.target.dataset.name);
+    let try1 = _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.findIndex(tv=>tv.title==e.target.dataset.name) ;
+    this.removeChildDOM((0,_Ui__WEBPACK_IMPORTED_MODULE_2__.sanitizeName)(e.target.dataset.name));
+    _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.splice(try1,1);
+    (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
     })
   })
-  console.log(data);
+  
 }
 
  removeChildDOM(idx) {
@@ -129,7 +126,6 @@ deleteButton(){
 
 
   storeTodo() {
-    console.log(`here!!! ${this.index}`);
     _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.push({
       title: this.title,
       description: this.description,
@@ -204,32 +200,34 @@ class Ui {
         _index__WEBPACK_IMPORTED_MODULE_0__.default.findIndex((pj, index) => {
           if(sanitizeName(pj.projectName) === e.target.id) {
             projectIdx = index;
-            console.log(projectIdx)
             this.displayTodos()
+
           }
         })
       })
+      
     })
   }
 
   displayTodos() {
     this.todosConent.innerHTML = '';
-    console.log('hello')
     _index__WEBPACK_IMPORTED_MODULE_0__.default[projectIdx].todos.forEach(todo => {
       const todoCard = `
       <div class="card border-primary  row">
-      <div class="card-body col-8">
-      <ul class="list-group list-group-flush">
-      <h1 class="list-group-item">Title:  ${todo.title}</h1>
-      <li class="list-group-item">Description:  ${todo.description}</li>
-      <li class="list-group-item">Due_date:  ${todo.dueDate}</li>
-      <li class="list-group-item">priority: ${todo.priority}</li>
-      </ul>
-      <button class="btn btn-outline-danger ">Delete</button>
-       </div>
-       </div>
+        <div class="card-body col-8">
+          <ul class="list-group list-group-flush">
+            <h1 class="list-group-item">Title:  ${todo.title}</h1>
+            <li class="list-group-item">Description:  ${todo.description}</li>
+            <li class="list-group-item">Due_date:  ${todo.dueDate}</li>
+            <li class="list-group-item">priority: ${todo.priority}</li>
+          </ul>
+          <button class="btn btn-outline-danger del-data" data-name="${this.title}">Delete</button>
+        </div>
+      </div>
         `
       this.todosConent.insertAdjacentHTML('afterbegin', todoCard)
+      const todos = new _Todos__WEBPACK_IMPORTED_MODULE_2__.default();
+      todos.deleteButton()
     })
   }
 
@@ -354,10 +352,10 @@ todoBtm.addEventListener("click",(e) =>{
 document.addEventListener("DOMContentLoaded", e => {
   const UI = new _components_Ui__WEBPACK_IMPORTED_MODULE_3__.default()
     UI.renderUi()
-    // checkProject()
     UI.deleteProject()
     UI.addBtn()
     UI.showTodos()
+  
 })
   
 // const checkProject = () => {

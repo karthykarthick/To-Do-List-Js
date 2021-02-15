@@ -14,17 +14,17 @@ class Todo {
 
   get showContent() {
     return `
-         <div class="card border-primary row" id="${sanitizeName(this.title)}">
-         <div class="card-body col-8">
-         <ul class="list-group list-group-flush">
-         <h1 class="list-group-item">Title: ${this.title}</h1>
-         <li class="list-group-item">Description: ${this.description}</li>
-         <li class="list-group-item">Due_Date: ${this.dueDate}</li>
-         <li class="list-group-item">Priority: ${this.priority}</li>
-         </ul>
-         <button class="btn btn-outline-danger del-data" data-name="${this.title}">Delete</button>
-          </div>
-          </div>
+      <div class="card border-primary row" id="${sanitizeName(this.title)}">
+        <div class="card-body col-8">
+          <ul class="list-group list-group-flush">
+            <h1 class="list-group-item">Title: ${this.title}</h1>
+            <li class="list-group-item">Description: ${this.description}</li>
+            <li class="list-group-item">Due_Date: ${this.dueDate}</li>
+            <li class="list-group-item">Priority: ${this.priority}</li>
+          </ul>
+          <button class="btn btn-outline-danger del-data" data-name="${this.title}">Delete</button>
+        </div>
+      </div>
         `;
   }
 
@@ -32,16 +32,13 @@ deleteButton(){
   const data = document.querySelectorAll(".del-data");
   data.forEach(btn => {
     btn.addEventListener("click",e=>{
-     var try1 = store[this.index].todos.findIndex(tv=>tv.title==e.target.dataset.name) ;
-     store[this.index].todos.splice(try1,1);
-     setLocalStorage();
-     this.removeChildDOM(sanitizeName(e.target.dataset.name));
-     console.log(try1);
-      console.log(store[this.index].todos);
-      console.log(e.target.dataset.name);
+    let try1 = store[this.index].todos.findIndex(tv=>tv.title==e.target.dataset.name) ;
+    this.removeChildDOM(sanitizeName(e.target.dataset.name));
+    store[this.index].todos.splice(try1,1);
+    setLocalStorage();
     })
   })
-  console.log(data);
+  
 }
 
  removeChildDOM(idx) {
@@ -52,7 +49,6 @@ deleteButton(){
 
 
   storeTodo() {
-    console.log(`here!!! ${this.index}`);
     store[this.index].todos.push({
       title: this.title,
       description: this.description,

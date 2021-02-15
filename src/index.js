@@ -33,10 +33,10 @@ todoBtm.addEventListener("click",(e) =>{
 document.addEventListener("DOMContentLoaded", e => {
   const UI = new Ui()
     UI.renderUi()
-    // checkProject()
     UI.deleteProject()
     UI.addBtn()
     UI.showTodos()
+  
 })
   
 // const checkProject = () => {
