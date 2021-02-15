@@ -6,7 +6,7 @@ import Ui from './components/Ui';
 const store = [
 ]
 
-let projectIdx = 0
+
 
 const data = document.querySelector(".submit-btn");
 data.addEventListener("click", (e) => {
@@ -18,12 +18,14 @@ data.addEventListener("click", (e) => {
 
 const todoBtm = document.querySelector(".hitme");
 todoBtm.addEventListener("click",(e) =>{
+  const todoForm = document.querySelector('.todo-form');
     e.preventDefault();
     const title = document.querySelector('.todo-title').value;
     const description = document.querySelector(".todo-description").value;
     const dueDate = document.querySelector('.todo-due-date').value;
     const priority = document.querySelector('#priority').value;
-    const todo = new Todo(title,description,dueDate,priority, projectIdx);
+    const todo = new Todo(title,description,dueDate,priority);
+    todoForm.classList.add('d-none')
     todo.renderTodo();
 } )
 
@@ -31,20 +33,20 @@ todoBtm.addEventListener("click",(e) =>{
 document.addEventListener("DOMContentLoaded", e => {
   const UI = new Ui()
     UI.renderUi()
-    checkProject()
+    // checkProject()
     UI.deleteProject()
-    console.log(store)
+    UI.addBtn()
+    UI.showTodos()
 })
   
-const checkProject = () => {
-  const projects = [...document.querySelectorAll('.project')]
-  projects.forEach(pj => {
-    pj.addEventListener('click', e => {
-      projectIdx = e.target.id
-      console.log(projectIdx)
-      })
-    })
-}
+// const checkProject = () => {
+//   const projects = [...document.querySelectorAll('.project')]
+//   projects.forEach(pj => {
+//     pj.addEventListener('click', e => {
+//       projectIdx = e.target.id
+//       })
+//     })
+// }
 
 
 

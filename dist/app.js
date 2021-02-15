@@ -73,6 +73,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././index */ "./src/index.js");
+/* harmony import */ var _Ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ui */ "./src/components/Ui.js");
+
 
 
 class Todo{
@@ -82,7 +84,7 @@ class Todo{
     this.dueDate = dueDate;
     this.priority = priority;
     this.todoContent = document.querySelector('.todos-content');
-    this.index = idx
+    this.index = _Ui__WEBPACK_IMPORTED_MODULE_1__.default
     }
 
     get showContent(){
@@ -94,14 +96,12 @@ class Todo{
     }
 
     storeTodo(){
-      console.log(this.index)
       _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.push({
         title: this.title,
         description: this.description,
         dueDate: this.dueDate,
         priority: this.priority
       });
-      console.log(_index__WEBPACK_IMPORTED_MODULE_0__.default[this.index]);
     }
 
     renderTodo(){
@@ -131,14 +131,55 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+let projectIdx = 0
+
 class Ui {
   constructor() {
-    this.projectContent = document.querySelector('.project-content')
+    this.projectContent = document.querySelector('.project-content');
+    this.todosConent = document.querySelector('.todos-content');
   }
 
   removeChildDOM(idx) {
     const child = document.querySelector(`#${idx}`);
     child.remove()
+  }
+
+  addBtn() {
+    const addBtns = document.querySelectorAll('.addTodo');
+    const todoForm = document.querySelector('.todo-form');
+    
+    addBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        todoForm.classList.remove('d-none');
+      })
+    })
+  }
+
+  showTodos() {
+    const projects = document.querySelectorAll('.project');
+    
+    projects.forEach(project => {
+      project.addEventListener('click', e => {
+        _index__WEBPACK_IMPORTED_MODULE_0__.default.findIndex((pj, index) => {
+          if(sanitizeName(pj.projectName) === e.target.id) {
+            projectIdx = index;
+            this.displayTodos()
+          }
+        })
+      })
+    })
+  }
+
+  displayTodos() {
+    this.todosConent.innerHTML = '';
+    _index__WEBPACK_IMPORTED_MODULE_0__.default[projectIdx].todos.forEach(todo => {
+      const todoCard = ` <h1>${todo.title}</h1>
+          <p>${todo.description}</p>
+          <p>${todo.dueDate}</p>
+          <p>${todo.priority}</p>
+        `
+      this.todosConent.insertAdjacentHTML('afterbegin', todoCard)
+    })
   }
 
   deleteProject() {
@@ -173,6 +214,7 @@ class Ui {
 
 }
 
+const sanitizeName = (text) => text.split(' ').join('')
 // arr.some((el,idx) =>{ 
 //   if(el.title == 'title2') {
 //       index = idx
@@ -234,7 +276,7 @@ __webpack_require__.r(__webpack_exports__);
 const store = [
 ]
 
-let projectIdx = 0
+
 
 const data = document.querySelector(".submit-btn");
 data.addEventListener("click", (e) => {
@@ -246,12 +288,14 @@ data.addEventListener("click", (e) => {
 
 const todoBtm = document.querySelector(".hitme");
 todoBtm.addEventListener("click",(e) =>{
+  const todoForm = document.querySelector('.todo-form');
     e.preventDefault();
     const title = document.querySelector('.todo-title').value;
     const description = document.querySelector(".todo-description").value;
     const dueDate = document.querySelector('.todo-due-date').value;
     const priority = document.querySelector('#priority').value;
-    const todo = new _components_Todos__WEBPACK_IMPORTED_MODULE_2__.default(title,description,dueDate,priority, projectIdx);
+    const todo = new _components_Todos__WEBPACK_IMPORTED_MODULE_2__.default(title,description,dueDate,priority);
+    todoForm.classList.add('d-none')
     todo.renderTodo();
 } )
 
@@ -259,20 +303,20 @@ todoBtm.addEventListener("click",(e) =>{
 document.addEventListener("DOMContentLoaded", e => {
   const UI = new _components_Ui__WEBPACK_IMPORTED_MODULE_3__.default()
     UI.renderUi()
-    checkProject()
+    // checkProject()
     UI.deleteProject()
-    console.log(store)
+    UI.addBtn()
+    UI.showTodos()
 })
   
-const checkProject = () => {
-  const projects = [...document.querySelectorAll('.project')]
-  projects.forEach(pj => {
-    pj.addEventListener('click', e => {
-      projectIdx = e.target.id
-      console.log(projectIdx)
-      })
-    })
-}
+// const checkProject = () => {
+//   const projects = [...document.querySelectorAll('.project')]
+//   projects.forEach(pj => {
+//     pj.addEventListener('click', e => {
+//       projectIdx = e.target.id
+//       })
+//     })
+// }
 
 
 

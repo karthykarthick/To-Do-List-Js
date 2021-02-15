@@ -1,4 +1,5 @@
-import store from '.././index'
+import store from '.././index';
+import projectIdx from './Ui';
 
 class Todo{
     constructor (title,description,dueDate,priority, idx) {
@@ -7,7 +8,7 @@ class Todo{
     this.dueDate = dueDate;
     this.priority = priority;
     this.todoContent = document.querySelector('.todos-content');
-    this.index = idx
+    this.index = projectIdx
     }
 
     get showContent(){
@@ -19,14 +20,12 @@ class Todo{
     }
 
     storeTodo(){
-      console.log(this.index)
       store[this.index].todos.push({
         title: this.title,
         description: this.description,
         dueDate: this.dueDate,
         priority: this.priority
       });
-      console.log(store[this.index]);
     }
 
     renderTodo(){
