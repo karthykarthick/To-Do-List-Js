@@ -1,26 +1,27 @@
 {
   "homepage": "https://github.com/karthykarthick/To-Do-List-Js",
-  "name": "To-do list",
+  "name": "To-Do-List-Js",
   "version": "1.0.0",
   "description": "This is a template for webpack",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack --mode development --watch",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kcotrinam/webpackTemplate.git"
+    "url": "git+https://github.com/karthykarthick/To-Do-List-Js.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kcotrinam/webpackTemplate/issues"
+    "url": "https://github.com/karthykarthick/To-Do-List-Js/issues"
   },
-  "homepage": "https://github.com/kcotrinam/webpackTemplate#readme",
+  "homepage": "https://github.com/kcotrinam/karthykarthick/To-Do-List-Js#readme",
   "devDependencies": {
     "css-minimizer-webpack-plugin": "^1.2.0",
     "eslint": "^6.8.0",
