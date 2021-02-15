@@ -74,6 +74,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././index */ "./src/index.js");
 /* harmony import */ var _Ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ui */ "./src/components/Ui.js");
+/* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
+
 
 
 
@@ -96,12 +98,14 @@ class Todo{
     }
 
     storeTodo(){
+      console.log(`here!!! ${this.index}`)
       _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.push({
         title: this.title,
         description: this.description,
         dueDate: this.dueDate,
         priority: this.priority
       });
+      (0,_storage__WEBPACK_IMPORTED_MODULE_2__.setLocalStorage)()
     }
 
     renderTodo(){
@@ -151,6 +155,10 @@ class Ui {
     addBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         todoForm.classList.remove('d-none');
+        _index__WEBPACK_IMPORTED_MODULE_0__.default.findIndex((pj, idx) => {
+          if (pj.projectName == e.target.dataset.name) projectIdx = idx;
+        })
+        console.log(projectIdx)
       })
     })
   }
@@ -163,6 +171,7 @@ class Ui {
         _index__WEBPACK_IMPORTED_MODULE_0__.default.findIndex((pj, index) => {
           if(sanitizeName(pj.projectName) === e.target.id) {
             projectIdx = index;
+            console.log(projectIdx)
             this.displayTodos()
           }
         })
@@ -203,7 +212,7 @@ class Ui {
     (0,_storage__WEBPACK_IMPORTED_MODULE_1__.populateStore)()
     _index__WEBPACK_IMPORTED_MODULE_0__.default.forEach(project => {
       const li = `<li class="project list-group-item"  id="${project.projectName.split(' ').join('')}">${project.projectName}
-      <i class="fa fa-plus float-right addTodo" aria-hidden="true"></i>
+      <i class="fa fa-plus float-right addTodo" aria-hidden="true" data-name= "${project.projectName}"></i>
       <i class="fas fa-times float-right mr-4 deleteProject" aria-hidden="true" data-name="${project.projectName}"></i>
       </li>`
       this.projectContent.insertAdjacentHTML('afterbegin', li)

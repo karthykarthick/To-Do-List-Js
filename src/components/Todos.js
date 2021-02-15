@@ -1,5 +1,6 @@
 import store from '.././index';
 import projectIdx from './Ui';
+import { setLocalStorage } from './storage';
 
 class Todo{
     constructor (title,description,dueDate,priority, idx) {
@@ -20,12 +21,14 @@ class Todo{
     }
 
     storeTodo(){
+      console.log(`here!!! ${this.index}`)
       store[this.index].todos.push({
         title: this.title,
         description: this.description,
         dueDate: this.dueDate,
         priority: this.priority
       });
+      setLocalStorage()
     }
 
     renderTodo(){
