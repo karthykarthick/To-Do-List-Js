@@ -41,6 +41,8 @@ export default class Ui {
 
   showTodos() {
     const projects = document.querySelectorAll('.project');
+    
+    
 
     projects.forEach(project => {
       project.addEventListener('click', e => {
@@ -58,6 +60,7 @@ export default class Ui {
     this.todosConent.innerHTML = '';
     store[projectIdx].todos.forEach(todo => {
       const todoCard = `
+      <div class="edit-form"></div>
       <div class="card border-primary  row" id="${sanitizeName(todo.title)}">
         <div class="card-body col-8">
           <ul class="list-group list-group-flush">
@@ -68,6 +71,7 @@ export default class Ui {
           </ul>
           <button class="btn btn-outline-danger del-data" data-name="${todo.title}">Delete</button>
           <button class="btn btn-outline-success complete-btn" data-sucess="${todo.title}">Completed task</button>
+          <button class="btn btn-outline-warning edit-btn" data-edit="${sanitizeName(todo.title)}">Edit</button>
         </div>
       </div>
         `;
@@ -77,6 +81,7 @@ export default class Ui {
     const todos = new Todo();
     todos.deleteButton();
     todos.completedTask();
+    todos.editTask()
   }
 
   deleteProject() {
