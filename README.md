@@ -8,7 +8,7 @@
 
 ## Live Demo:
 
-[Live Demo Link](https://karthykarthick.github.io/To-Do-List-Js/)
+[Live Demo Link](https://boring-golick-b9060d.netlify.app)
 
 ##  Built with
 
