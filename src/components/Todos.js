@@ -1,6 +1,13 @@
-import store from ".././index";
-import { setLocalStorage } from "./storage";
-import { projectIdx,sanitizeName } from "./Ui";
+/* eslint-disable linebreak-style */
+/* eslint-disable max-len */
+/* eslint-disable linebreak-style */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable linebreak-style */
+/* eslint-disable import/no-cycle */
+/* eslint-disable linebreak-style */
+import store from '../index';
+import { setLocalStorage } from './storage';
+import { projectIdx, sanitizeName } from './Ui';
 
 class Todo {
   constructor(title, description, dueDate, priority) {
@@ -8,7 +15,7 @@ class Todo {
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.todoContent = document.querySelector(".todos-content");
+    this.todoContent = document.querySelector('.todos-content');
     this.index = projectIdx;
   }
 
@@ -30,35 +37,33 @@ class Todo {
   }
 
   completedTask() {
-    const btns = document.querySelectorAll(".complete-btn");
-    
+    const btns = document.querySelectorAll('.complete-btn');
+
     btns.forEach(btn => {
       btn.addEventListener('click', e => {
-        const card = document.querySelector(`#${e.target.dataset.sucess}`)
-        card.classList.toggle('border')
-        card.classList.toggle('border-success')
-      })
-    })
+        const card = document.querySelector(`#${e.target.dataset.sucess}`);
+        card.classList.toggle('border');
+        card.classList.toggle('border-success');
+      });
+    });
   }
 
-  deleteButton(){
-    const data = document.querySelectorAll(".del-data");
+  deleteButton() {
+    const data = document.querySelectorAll('.del-data');
     data.forEach(btn => {
-      btn.addEventListener("click", e => {
-        const idxToDelete = store[this.index].todos.findIndex(td => td.title === e.target.dataset.name)
-      this.removeChildDOM(sanitizeName(e.target.dataset.name));
-      store[this.index].todos.splice(idxToDelete,1);
-      setLocalStorage();
-      })
-    })
-    
+      btn.addEventListener('click', e => {
+        const idxToDelete = store[this.index].todos.findIndex(td => td.title === e.target.dataset.name);
+        this.removeChildDOM(sanitizeName(e.target.dataset.name));
+        store[this.index].todos.splice(idxToDelete, 1);
+        setLocalStorage();
+      });
+    });
   }
 
   removeChildDOM(idx) {
     const child = document.querySelector(`#${idx}`);
-    child.remove()
+    child.remove();
   }
-
 
 
   storeTodo() {
@@ -72,7 +77,7 @@ class Todo {
   }
 
   renderTodo() {
-    this.todoContent.insertAdjacentHTML("afterbegin", this.showContent);
+    this.todoContent.insertAdjacentHTML('afterbegin', this.showContent);
     this.storeTodo();
     this.deleteButton();
   }
