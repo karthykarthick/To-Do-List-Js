@@ -8,7 +8,7 @@
 
 ## Live Demo:
 
-[Live Demo Link](https://kcotrinam.github.io/lib/)
+[Live Demo Link](https://karthykarthick.github.io/To-Do-List-Js/)
 
 ##  Built with
 

@@ -139,7 +139,7 @@ class Todo {
     this.todoContent.insertAdjacentHTML('afterbegin', this.showContent);
     this.storeTodo();
     this.deleteButton();
-    // this.changeValues();
+    this.editTask();
   }
 }
 
