@@ -79,42 +79,75 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class Todo{
-    constructor (title,description,dueDate,priority, idx) {
+class Todo {
+  constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
     this.priority = priority;
-    this.todoContent = document.querySelector('.todos-content');
-    this.index = _Ui__WEBPACK_IMPORTED_MODULE_2__.projectIdx
-    }
+    this.todoContent = document.querySelector(".todos-content");
+    this.index = _Ui__WEBPACK_IMPORTED_MODULE_2__.projectIdx;
+  }
 
-    get showContent(){
-        return (` <h1>${this.title}</h1>
-          <p>${this.description}</p>
-          <p>${this.dueDate}</p>
-          <p>${this.priority}</p>
-        `)
-    }
+  get showContent() {
+    return `
+         <div class="card border-primary row" id="${(0,_Ui__WEBPACK_IMPORTED_MODULE_2__.sanitizeName)(this.title)}">
+         <div class="card-body col-8">
+         <ul class="list-group list-group-flush">
+         <h1 class="list-group-item">Title: ${this.title}</h1>
+         <li class="list-group-item">Description: ${this.description}</li>
+         <li class="list-group-item">Due_Date: ${this.dueDate}</li>
+         <li class="list-group-item">Priority: ${this.priority}</li>
+         </ul>
+         <button class="btn btn-outline-danger del-data" data-name="${this.title}">Delete</button>
+          </div>
+          </div>
+        `;
+  }
 
-    storeTodo(){
-      console.log(`here!!! ${this.index}`)
-      _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.push({
-        title: this.title,
-        description: this.description,
-        dueDate: this.dueDate,
-        priority: this.priority
-      });
-      (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)()
-    }
+deleteButton(){
+  const data = document.querySelectorAll(".del-data");
+  data.forEach(btn => {
+    btn.addEventListener("click",e=>{
+     var try1 = _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.findIndex(tv=>tv.title==e.target.dataset.name) ;
+     _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.splice(try1,1);
+     (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
+     this.removeChildDOM((0,_Ui__WEBPACK_IMPORTED_MODULE_2__.sanitizeName)(e.target.dataset.name));
+     console.log(try1);
+      console.log(_index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos);
+      console.log(e.target.dataset.name);
+    })
+  })
+  console.log(data);
+}
 
-    renderTodo(){
-        this.todoContent.insertAdjacentHTML("afterbegin",this.showContent);
-        this.storeTodo();
-    }
+ removeChildDOM(idx) {
+    const child = document.querySelector(`#${idx}`);
+    child.remove()
+  }
+
+
+
+  storeTodo() {
+    console.log(`here!!! ${this.index}`);
+    _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.push({
+      title: this.title,
+      description: this.description,
+      dueDate: this.dueDate,
+      priority: this.priority,
+    });
+    (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
+  }
+
+  renderTodo() {
+    this.todoContent.insertAdjacentHTML("afterbegin", this.showContent);
+    this.storeTodo();
+    this.deleteButton();
+  }
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Todo);
+
 
 /***/ }),
 
@@ -127,7 +160,8 @@ class Todo{
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "projectIdx": () => (/* binding */ projectIdx),
-/* harmony export */   "default": () => (/* binding */ Ui)
+/* harmony export */   "default": () => (/* binding */ Ui),
+/* harmony export */   "sanitizeName": () => (/* binding */ sanitizeName)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! .././index */ "./src/index.js");
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
@@ -156,7 +190,8 @@ class Ui {
     addBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         todoForm.classList.remove('d-none');
-        _index__WEBPACK_IMPORTED_MODULE_0__.default.findIndex(pj => pj.projectName == e.target.dataset.name);
+        projectIdx = _index__WEBPACK_IMPORTED_MODULE_0__.default.findIndex(pj => pj.projectName == e.target.dataset.name);
+        this.displayTodos();
         })
       })
   }
@@ -181,10 +216,18 @@ class Ui {
     this.todosConent.innerHTML = '';
     console.log('hello')
     _index__WEBPACK_IMPORTED_MODULE_0__.default[projectIdx].todos.forEach(todo => {
-      const todoCard = ` <h1>${todo.title}</h1>
-          <p>${todo.description}</p>
-          <p>${todo.dueDate}</p>
-          <p>${todo.priority}</p>
+      const todoCard = `
+      <div class="card border-primary  row">
+      <div class="card-body col-8">
+      <ul class="list-group list-group-flush">
+      <h1 class="list-group-item">Title:  ${todo.title}</h1>
+      <li class="list-group-item">Description:  ${todo.description}</li>
+      <li class="list-group-item">Due_date:  ${todo.dueDate}</li>
+      <li class="list-group-item">priority: ${todo.priority}</li>
+      </ul>
+      <button class="btn btn-outline-danger ">Delete</button>
+       </div>
+       </div>
         `
       this.todosConent.insertAdjacentHTML('afterbegin', todoCard)
     })
