@@ -75,7 +75,6 @@ export default class Ui {
       </div>
         `;
       this.todosConent.insertAdjacentHTML('afterbegin', todoCard);
-      // todos.completedTask()
     });
     const todos = new Todo();
     todos.deleteButton();

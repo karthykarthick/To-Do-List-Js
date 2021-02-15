@@ -81,7 +81,6 @@ class Todo {
   changeValues(idx) {
     const editBtn = document.querySelector('.edit-form-btn');
     editBtn.addEventListener('click', () => {
-      // e.preventDefault();
       const editedTitle = document.querySelector('.edit-title').value;
       const editedDescription = document.querySelector('.edit-description').value;
       const editedDate = document.querySelector('.edit-date').value;
