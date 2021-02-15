@@ -23,9 +23,22 @@ class Todo {
             <li class="list-group-item">Priority: ${this.priority}</li>
           </ul>
           <button class="btn btn-outline-danger del-data" data-name="${this.title}">Delete</button>
+          <button class="btn btn-outline-success complete-btn" data-sucess="${sanitizeName(this.title)}">Completed task</button>
         </div>
       </div>
         `;
+  }
+
+  completedTask() {
+    const btns = document.querySelectorAll(".complete-btn");
+    
+    btns.forEach(btn => {
+      btn.addEventListener('click', e => {
+        const card = document.querySelector(`#${e.target.dataset.sucess}`)
+        card.classList.toggle('border')
+        card.classList.toggle('border-success')
+      })
+    })
   }
 
   deleteButton(){
@@ -61,7 +74,7 @@ class Todo {
   renderTodo() {
     this.todoContent.insertAdjacentHTML("afterbegin", this.showContent);
     this.storeTodo();
-    // this.deleteButton();
+    this.deleteButton();
   }
 }
 

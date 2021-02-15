@@ -67,6 +67,7 @@ export default class Ui {
     })
     const todos = new Todo();
     todos.deleteButton()
+    todos.completedTask()
   }
 
   deleteProject() {
