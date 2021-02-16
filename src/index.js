@@ -3,9 +3,6 @@ import Project, { deleteProject } from './components/Project';
 import Todo from './components/Todos';
 import Ui from './components/Ui';
 
-const store = [
-];
-
 
 const data = document.querySelector('.submit-btn');
 data.addEventListener('click', () => {
@@ -35,5 +32,3 @@ document.addEventListener('DOMContentLoaded', () => {
   UI.addBtn();
   UI.showTodos();
 });
-
-export default store;

@@ -1,4 +1,5 @@
-import store from '../index';
+const store = [
+];
 
 const setLocalStorage = () => {
   window.localStorage.setItem('todos', JSON.stringify(store));
@@ -13,4 +14,4 @@ const populateStore = () => {
   }
 };
 
-export { setLocalStorage, populateStore };
+export { setLocalStorage, populateStore, store };

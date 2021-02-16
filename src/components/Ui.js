@@ -1,5 +1,4 @@
-import store from '../index';
-import { populateStore } from './storage';
+import { populateStore, store } from './storage';
 import Todo from './Todos';
 
 export let projectIdx = 0;

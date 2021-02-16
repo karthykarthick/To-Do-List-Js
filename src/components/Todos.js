@@ -1,5 +1,4 @@
-import store from '../index';
-import { setLocalStorage } from './storage';
+import { setLocalStorage, store } from './storage';
 import { projectIdx, sanitizeName, removeChildDOM } from './Ui';
 
 const editForm = () => (`
