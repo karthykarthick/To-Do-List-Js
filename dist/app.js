@@ -26,7 +26,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
-/* harmony import */ var _Ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ui */ "./src/components/Ui.js");
+/* harmony import */ var _Todos__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Todos */ "./src/components/Todos.js");
 
 
 
@@ -39,7 +39,7 @@ const deleteProject = () => {
         if (obj.projectName === deleteBtn.dataset.name) {
           _storage__WEBPACK_IMPORTED_MODULE_0__.store.splice(idx, 1);
           (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
-          (0,_Ui__WEBPACK_IMPORTED_MODULE_1__.removeChildDOM)((deleteBtn.dataset.name).split(' ').join(''));
+          (0,_Todos__WEBPACK_IMPORTED_MODULE_1__.removeChildDOM)((deleteBtn.dataset.name).split(' ').join(''));
         }
       });
     });
@@ -87,12 +87,21 @@ class Project {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "sanitizeName": () => (/* binding */ sanitizeName),
+/* harmony export */   "removeChildDOM": () => (/* binding */ removeChildDOM),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
 /* harmony import */ var _Ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ui */ "./src/components/Ui.js");
 
 
+
+const sanitizeName = (text) => text.split(' ').join('');
+
+const removeChildDOM = (idx) => {
+  const child = document.querySelector(`#${idx}`);
+  child.remove();
+};
 
 const editForm = () => (`
           <form>
@@ -141,7 +150,7 @@ class Todo {
   get showContent() {
     return `
     <div class="edit-form"></div>
-      <div class="card border-primary row" id="${(0,_Ui__WEBPACK_IMPORTED_MODULE_1__.sanitizeName)(this.title)}">
+      <div class="card border-primary row" id="${sanitizeName(this.title)}">
         <div class="card-body col-8">
           <ul class="list-group list-group-flush">
             <h1 class="list-group-item">Title: ${this.title}</h1>
@@ -150,8 +159,8 @@ class Todo {
             <li class="list-group-item">Priority: ${this.priority}</li>
           </ul>
           <button class="btn btn-outline-danger del-data" data-name="${this.title}">Delete</button>
-          <button class="btn btn-outline-success complete-btn" data-sucess="${(0,_Ui__WEBPACK_IMPORTED_MODULE_1__.sanitizeName)(this.title)}">Completed task</button>
-          <button class="btn btn-outline-warning edit-btn" data-edit="${(0,_Ui__WEBPACK_IMPORTED_MODULE_1__.sanitizeName)(this.title)}">Edit</button>
+          <button class="btn btn-outline-success complete-btn" data-sucess="${sanitizeName(this.title)}">Completed task</button>
+          <button class="btn btn-outline-warning edit-btn" data-edit="${sanitizeName(this.title)}">Edit</button>
         </div>
       </div>
         `;
@@ -165,7 +174,7 @@ class Todo {
       btn.addEventListener('click', e => {
         const todoIndex = _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index]
           .todos
-          .findIndex(todo => (0,_Ui__WEBPACK_IMPORTED_MODULE_1__.sanitizeName)(todo.title) === e.target.dataset.edit);
+          .findIndex(todo => sanitizeName(todo.title) === e.target.dataset.edit);
         editForms[todoIndex].insertAdjacentHTML('afterbegin', editForm());
 
         this.changeValues(todoIndex);
@@ -196,7 +205,7 @@ class Todo {
         const idxToDelete = _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index]
           .todos.findIndex(td => td.title === e
             .target.dataset.name);
-        (0,_Ui__WEBPACK_IMPORTED_MODULE_1__.removeChildDOM)((0,_Ui__WEBPACK_IMPORTED_MODULE_1__.sanitizeName)(e.target.dataset.name));
+        removeChildDOM(sanitizeName(e.target.dataset.name));
         _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index].todos.splice(idxToDelete, 1);
         (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
       });
@@ -235,8 +244,6 @@ class Todo {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "projectIdx": () => (/* binding */ projectIdx),
-/* harmony export */   "sanitizeName": () => (/* binding */ sanitizeName),
-/* harmony export */   "removeChildDOM": () => (/* binding */ removeChildDOM),
 /* harmony export */   "default": () => (/* binding */ Ui)
 /* harmony export */ });
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
@@ -245,13 +252,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let projectIdx = 0;
-
-const sanitizeName = (text) => text.split(' ').join('');
-
-const removeChildDOM = (idx) => {
-  const child = document.querySelector(`#${idx}`);
-  child.remove();
-};
 
 class Ui {
   constructor() {
@@ -279,7 +279,7 @@ class Ui {
     projects.forEach(project => {
       project.addEventListener('click', e => {
         e.stopPropagation();
-        projectIdx = _storage__WEBPACK_IMPORTED_MODULE_0__.store.findIndex(pj => sanitizeName(pj.projectName) === e.target.id);
+        projectIdx = _storage__WEBPACK_IMPORTED_MODULE_0__.store.findIndex(pj => (0,_Todos__WEBPACK_IMPORTED_MODULE_1__.sanitizeName)(pj.projectName) === e.target.id);
         this.displayTodos();
       });
     });
@@ -290,7 +290,7 @@ class Ui {
     _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx].todos.forEach(todo => {
       const todoCard = `
       <div class="edit-form"></div>
-      <div class="card border-primary  row" id="${sanitizeName(todo.title)}">
+      <div class="card border-primary  row" id="${(0,_Todos__WEBPACK_IMPORTED_MODULE_1__.sanitizeName)(todo.title)}">
         <div class="card-body col-8">
           <ul class="list-group list-group-flush">
             <h1 class="list-group-item">Title:  ${todo.title}</h1>
@@ -300,7 +300,7 @@ class Ui {
           </ul>
           <button class="btn btn-outline-danger del-data" data-name="${todo.title}">Delete</button>
           <button class="btn btn-outline-success complete-btn" data-sucess="${todo.title}">Completed task</button>
-          <button class="btn btn-outline-warning edit-btn" data-edit="${sanitizeName(todo.title)}">Edit</button>
+          <button class="btn btn-outline-warning edit-btn" data-edit="${(0,_Todos__WEBPACK_IMPORTED_MODULE_1__.sanitizeName)(todo.title)}">Edit</button>
         </div>
       </div>
         `;

@@ -1,5 +1,12 @@
 import { setLocalStorage, store } from './storage';
-import { projectIdx, sanitizeName, removeChildDOM } from './Ui';
+import { projectIdx } from './Ui';
+
+export const sanitizeName = (text) => text.split(' ').join('');
+
+export const removeChildDOM = (idx) => {
+  const child = document.querySelector(`#${idx}`);
+  child.remove();
+};
 
 const editForm = () => (`
           <form>

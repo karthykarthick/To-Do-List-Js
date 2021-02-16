@@ -1,14 +1,7 @@
 import { populateStore, store } from './storage';
-import Todo from './Todos';
+import Todo, { sanitizeName } from './Todos';
 
 export let projectIdx = 0;
-
-export const sanitizeName = (text) => text.split(' ').join('');
-
-export const removeChildDOM = (idx) => {
-  const child = document.querySelector(`#${idx}`);
-  child.remove();
-};
 
 export default class Ui {
   constructor() {

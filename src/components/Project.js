@@ -1,5 +1,5 @@
 import { setLocalStorage, store } from './storage';
-import { removeChildDOM } from './Ui';
+import { removeChildDOM } from './Todos';
 
 export const deleteProject = () => {
   const deleteBtns = document.querySelectorAll('.deleteProject');
