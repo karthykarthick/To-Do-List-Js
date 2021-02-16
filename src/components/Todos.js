@@ -42,6 +42,37 @@ const editForm = () => (`
 //   });
 // };
 
+const changeValues = (projectIdx, idx) => {
+  const editBtn = document.querySelector('.edit-form-btn');
+  editBtn.addEventListener('click', () => {
+    const editedTitle = document.querySelector('.edit-title').value;
+    const editedDescription = document.querySelector('.edit-description').value;
+    const editedDate = document.querySelector('.edit-date').value;
+    const editedPriority = document.querySelector('#edit-priority').value;
+    store[projectIdx].todos[idx].title = editedTitle;
+    store[projectIdx].todos[idx].description = editedDescription;
+    store[projectIdx].todos[idx].dueDate = editedDate;
+    store[projectIdx].todos[idx].priority = editedPriority;
+    setLocalStorage();
+  });
+};
+
+export const editTask = (projectIdx) => {
+  const btns = document.querySelectorAll('.edit-btn');
+  const editForms = [...document.querySelectorAll('.edit-form')].reverse();
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const todoIndex = store[projectIdx]
+        .todos
+        .findIndex(todo => sanitizeName(todo.title) === e.target.dataset.edit);
+      editForms[todoIndex].insertAdjacentHTML('afterbegin', editForm());
+
+      changeValues(projectIdx, todoIndex);
+    });
+  });
+};
+
 class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
@@ -71,38 +102,6 @@ class Todo {
         `;
   }
 
-  editTask(projectIdx) {
-    const btns = document.querySelectorAll('.edit-btn');
-    const editForms = [...document.querySelectorAll('.edit-form')].reverse();
-
-    btns.forEach(btn => {
-      btn.addEventListener('click', e => {
-        const todoIndex = store[projectIdx]
-          .todos
-          .findIndex(todo => sanitizeName(todo.title) === e.target.dataset.edit);
-        editForms[todoIndex].insertAdjacentHTML('afterbegin', editForm());
-
-        this.changeValues(projectIdx, todoIndex);
-      });
-    });
-  }
-
-  changeValues(projectIdx, idx) {
-    const editBtn = document.querySelector('.edit-form-btn');
-    editBtn.addEventListener('click', () => {
-      const editedTitle = document.querySelector('.edit-title').value;
-      const editedDescription = document.querySelector('.edit-description').value;
-      const editedDate = document.querySelector('.edit-date').value;
-      const editedPriority = document.querySelector('#edit-priority').value;
-      store[projectIdx].todos[idx].title = editedTitle;
-      store[projectIdx].todos[idx].description = editedDescription;
-      store[projectIdx].todos[idx].dueDate = editedDate;
-      store[projectIdx].todos[idx].priority = editedPriority;
-      setLocalStorage();
-    });
-  }
-
-
   deleteButton(projectIdx) {
     const data = document.querySelectorAll('.del-data');
     data.forEach(btn => {
@@ -131,7 +130,7 @@ class Todo {
     this.todoContent.insertAdjacentHTML('afterbegin', this.showContent);
     this.storeTodo(projectIdx);
     this.deleteButton();
-    this.editTask();
+    editTask();
   }
 }
 
