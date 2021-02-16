@@ -1,5 +1,5 @@
 import './scss/styles.scss';
-import Project from './components/Project';
+import Project, { deleteProject } from './components/Project';
 import Todo from './components/Todos';
 import Ui from './components/Ui';
 
@@ -31,7 +31,7 @@ todoBtm.addEventListener('click', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
   const UI = new Ui();
   UI.renderUi();
-  UI.deleteProject();
+  deleteProject();
   UI.addBtn();
   UI.showTodos();
 });

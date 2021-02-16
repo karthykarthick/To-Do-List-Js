@@ -1,6 +1,40 @@
 import store from '../index';
 import { setLocalStorage } from './storage';
-import { projectIdx, sanitizeName } from './Ui';
+import { projectIdx, sanitizeName, removeChildDOM } from './Ui';
+
+const editForm = () => (`
+          <form>
+            <label>title
+              <input type="text" class="todo-title form-control edit-title"></input>
+            </label>
+            <label>
+              description
+              <input type="text" class="todo-title form-control edit-description"></input>
+            </label>
+            <label> Due Date
+              <input type="date" class="todo-title form-control edit-date"></input>
+            </label>
+            <select name="edit-priority" id="edit-priority" class="form-control">
+              <option value="high">High</option>
+              <option value="medium">medium</option>
+              <option value="low">low</option>
+          </select>
+            <button type="submit" class="edit-form-btn btn btn-primary">Edit</button>
+          </form>
+          `
+);
+
+// const completedTask = () => {
+//   const btns = document.querySelectorAll('.complete-btn');
+
+//   btns.forEach(btn => {
+//     btn.addEventListener('click', e => {
+//       const card = document.querySelector(`#${e.target.dataset.sucess}`);
+//       card.classList.toggle('border');
+//       card.classList.toggle('border-success');
+//     });
+//   });
+// };
 
 class Todo {
   constructor(title, description, dueDate, priority) {
@@ -31,30 +65,6 @@ class Todo {
         `;
   }
 
-  get editForm() {
-    return (`
-            <form>
-              <label>title
-                <input type="text" class="todo-title form-control edit-title"></input>
-              </label>
-              <label>
-                description
-                <input type="text" class="todo-title form-control edit-description"></input>
-              </label>
-              <label> Due Date
-                <input type="date" class="todo-title form-control edit-date"></input>
-              </label>
-              <select name="edit-priority" id="edit-priority" class="form-control">
-                <option value="high">High</option>
-                <option value="medium">medium</option>
-                <option value="low">low</option>
-            </select>
-              <button type="submit" class="edit-form-btn btn btn-primary">Edit</button>
-            </form>
-            `
-    );
-  }
-
   editTask() {
     const btns = document.querySelectorAll('.edit-btn');
     const editForms = [...document.querySelectorAll('.edit-form')].reverse();
@@ -64,7 +74,7 @@ class Todo {
         const todoIndex = store[this.index]
           .todos
           .findIndex(todo => sanitizeName(todo.title) === e.target.dataset.edit);
-        editForms[todoIndex].insertAdjacentHTML('afterbegin', this.editForm);
+        editForms[todoIndex].insertAdjacentHTML('afterbegin', editForm());
 
         this.changeValues(todoIndex);
       });
@@ -86,38 +96,20 @@ class Todo {
     });
   }
 
-  completedTask() {
-    const btns = document.querySelectorAll('.complete-btn');
-
-    btns.forEach(btn => {
-      btn.addEventListener('click', e => {
-        const card = document.querySelector(`#${e.target.dataset.sucess}`);
-        card.classList.toggle('border');
-        card.classList.toggle('border-success');
-      });
-    });
-  }
 
   deleteButton() {
     const data = document.querySelectorAll('.del-data');
     data.forEach(btn => {
       btn.addEventListener('click', e => {
         const idxToDelete = store[this.index]
-              .todos.findIndex(td => td.title === e
-              .target.dataset.name);
-        this.removeChildDOM(sanitizeName(e.target.dataset.name));
+          .todos.findIndex(td => td.title === e
+            .target.dataset.name);
+        removeChildDOM(sanitizeName(e.target.dataset.name));
         store[this.index].todos.splice(idxToDelete, 1);
         setLocalStorage();
       });
     });
   }
-
-
-  removeChildDOM(idx) {
-    const child = document.querySelector(`#${idx}`);
-    child.remove();
-  }
-
 
   storeTodo() {
     store[this.index].todos.push({

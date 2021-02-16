@@ -1,5 +1,21 @@
 import store from '../index';
 import { setLocalStorage } from './storage';
+import { removeChildDOM } from './Ui';
+
+export const deleteProject = () => {
+  const deleteBtns = document.querySelectorAll('.deleteProject');
+  deleteBtns.forEach(deleteBtn => {
+    deleteBtn.addEventListener('click', () => {
+      store.some((obj, idx) => {
+        if (obj.projectName === deleteBtn.dataset.name) {
+          store.splice(idx, 1);
+          setLocalStorage();
+          removeChildDOM((deleteBtn.dataset.name).split(' ').join(''));
+        }
+      });
+    });
+  });
+};
 
 class Project {
   constructor(projectName) {

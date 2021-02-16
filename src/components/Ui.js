@@ -1,20 +1,20 @@
 import store from '../index';
-import { populateStore, setLocalStorage } from './storage';
+import { populateStore } from './storage';
 import Todo from './Todos';
 
 export let projectIdx = 0;
 
 export const sanitizeName = (text) => text.split(' ').join('');
 
+export const removeChildDOM = (idx) => {
+  const child = document.querySelector(`#${idx}`);
+  child.remove();
+};
+
 export default class Ui {
   constructor() {
     this.projectContent = document.querySelector('.project-content');
     this.todosConent = document.querySelector('.todos-content');
-  }
-
-  removeChildDOM(idx) {
-    const child = document.querySelector(`#${idx}`);
-    child.remove();
   }
 
   addBtn() {
@@ -69,23 +69,8 @@ export default class Ui {
     });
     const todos = new Todo();
     todos.deleteButton();
-    todos.completedTask();
+    // todos.completedTask();
     todos.editTask();
-  }
-
-  deleteProject() {
-    const deleteBtns = document.querySelectorAll('.deleteProject');
-    deleteBtns.forEach(deleteBtn => {
-      deleteBtn.addEventListener('click', () => {
-        store.some((obj, idx) => {
-          if (obj.projectName === deleteBtn.dataset.name) {
-            store.splice(idx, 1);
-            setLocalStorage();
-            this.removeChildDOM((deleteBtn.dataset.name).split(' ').join(''));
-          }
-        });
-      });
-    });
   }
 
 
