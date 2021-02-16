@@ -33,8 +33,9 @@ __webpack_require__.r(__webpack_exports__);
 const deleteProject = () => {
   const deleteBtns = document.querySelectorAll('.deleteProject');
   deleteBtns.forEach(deleteBtn => {
-    deleteBtn.addEventListener('click', () => {
-      _storage__WEBPACK_IMPORTED_MODULE_0__.store.some((obj, idx) => {
+    deleteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      _storage__WEBPACK_IMPORTED_MODULE_0__.store.forEach((obj, idx) => {
         if (obj.projectName === deleteBtn.dataset.name) {
           _storage__WEBPACK_IMPORTED_MODULE_0__.store.splice(idx, 1);
           (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
@@ -275,9 +276,9 @@ class Ui {
   showTodos() {
     const projects = document.querySelectorAll('.project');
 
-
     projects.forEach(project => {
       project.addEventListener('click', e => {
+        e.stopPropagation();
         projectIdx = _storage__WEBPACK_IMPORTED_MODULE_0__.store.findIndex(pj => sanitizeName(pj.projectName) === e.target.id);
         this.displayTodos();
       });

@@ -4,8 +4,9 @@ import { removeChildDOM } from './Ui';
 export const deleteProject = () => {
   const deleteBtns = document.querySelectorAll('.deleteProject');
   deleteBtns.forEach(deleteBtn => {
-    deleteBtn.addEventListener('click', () => {
-      store.some((obj, idx) => {
+    deleteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      store.forEach((obj, idx) => {
         if (obj.projectName === deleteBtn.dataset.name) {
           store.splice(idx, 1);
           setLocalStorage();

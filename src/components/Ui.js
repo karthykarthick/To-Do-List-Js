@@ -33,9 +33,9 @@ export default class Ui {
   showTodos() {
     const projects = document.querySelectorAll('.project');
 
-
     projects.forEach(project => {
       project.addEventListener('click', e => {
+        e.stopPropagation();
         projectIdx = store.findIndex(pj => sanitizeName(pj.projectName) === e.target.id);
         this.displayTodos();
       });
