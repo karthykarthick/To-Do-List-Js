@@ -4,6 +4,8 @@ import Todo from './Todos';
 
 export let projectIdx = 0;
 
+export const sanitizeName = (text) => text.split(' ').join('');
+
 export default class Ui {
   constructor() {
     this.projectContent = document.querySelector('.project-content');
@@ -22,7 +24,7 @@ export default class Ui {
     addBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         todoForm.classList.remove('d-none');
-        projectIdx = store.findIndex(pj => pj.projectName == e.target.dataset.name);
+        projectIdx = store.findIndex(pj => pj.projectName === e.target.dataset.name);
         this.displayTodos();
       });
     });
@@ -76,7 +78,7 @@ export default class Ui {
     deleteBtns.forEach(deleteBtn => {
       deleteBtn.addEventListener('click', () => {
         store.some((obj, idx) => {
-          if (obj.projectName == deleteBtn.dataset.name) {
+          if (obj.projectName === deleteBtn.dataset.name) {
             store.splice(idx, 1);
             setLocalStorage();
             this.removeChildDOM((deleteBtn.dataset.name).split(' ').join(''));
@@ -98,5 +100,3 @@ export default class Ui {
     });
   }
 }
-
-export const sanitizeName = (text) => text.split(' ').join('');

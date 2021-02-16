@@ -102,7 +102,9 @@ class Todo {
     const data = document.querySelectorAll('.del-data');
     data.forEach(btn => {
       btn.addEventListener('click', e => {
-        const idxToDelete = store[this.index].todos.findIndex(td => td.title === e.target.dataset.name);
+        const idxToDelete = store[this.index]
+              .todos.findIndex(td => td.title === e
+              .target.dataset.name);
         this.removeChildDOM(sanitizeName(e.target.dataset.name));
         store[this.index].todos.splice(idxToDelete, 1);
         setLocalStorage();

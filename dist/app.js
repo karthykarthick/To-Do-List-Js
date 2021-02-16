@@ -179,7 +179,9 @@ class Todo {
     const data = document.querySelectorAll('.del-data');
     data.forEach(btn => {
       btn.addEventListener('click', e => {
-        const idxToDelete = _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.findIndex(td => td.title === e.target.dataset.name);
+        const idxToDelete = _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index]
+              .todos.findIndex(td => td.title === e
+              .target.dataset.name);
         this.removeChildDOM((0,_Ui__WEBPACK_IMPORTED_MODULE_2__.sanitizeName)(e.target.dataset.name));
         _index__WEBPACK_IMPORTED_MODULE_0__.default[this.index].todos.splice(idxToDelete, 1);
         (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
@@ -226,8 +228,8 @@ class Todo {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "projectIdx": () => (/* binding */ projectIdx),
-/* harmony export */   "default": () => (/* binding */ Ui),
-/* harmony export */   "sanitizeName": () => (/* binding */ sanitizeName)
+/* harmony export */   "sanitizeName": () => (/* binding */ sanitizeName),
+/* harmony export */   "default": () => (/* binding */ Ui)
 /* harmony export */ });
 /* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../index */ "./src/index.js");
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
@@ -237,6 +239,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let projectIdx = 0;
+
+const sanitizeName = (text) => text.split(' ').join('');
 
 class Ui {
   constructor() {
@@ -256,7 +260,7 @@ class Ui {
     addBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
         todoForm.classList.remove('d-none');
-        projectIdx = _index__WEBPACK_IMPORTED_MODULE_0__.default.findIndex(pj => pj.projectName == e.target.dataset.name);
+        projectIdx = _index__WEBPACK_IMPORTED_MODULE_0__.default.findIndex(pj => pj.projectName === e.target.dataset.name);
         this.displayTodos();
       });
     });
@@ -310,7 +314,7 @@ class Ui {
     deleteBtns.forEach(deleteBtn => {
       deleteBtn.addEventListener('click', () => {
         _index__WEBPACK_IMPORTED_MODULE_0__.default.some((obj, idx) => {
-          if (obj.projectName == deleteBtn.dataset.name) {
+          if (obj.projectName === deleteBtn.dataset.name) {
             _index__WEBPACK_IMPORTED_MODULE_0__.default.splice(idx, 1);
             (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
             this.removeChildDOM((deleteBtn.dataset.name).split(' ').join(''));
@@ -332,8 +336,6 @@ class Ui {
     });
   }
 }
-
-const sanitizeName = (text) => text.split(' ').join('');
 
 
 /***/ }),
@@ -393,7 +395,7 @@ const store = [
 
 
 const data = document.querySelector('.submit-btn');
-data.addEventListener('click', (e) => {
+data.addEventListener('click', () => {
   const ProjectTitle = document.querySelector('input').value;
   const newProject = new _components_Project__WEBPACK_IMPORTED_MODULE_1__.default(ProjectTitle);
   newProject.renderProject();
@@ -413,7 +415,7 @@ todoBtm.addEventListener('click', (e) => {
 });
 
 
-document.addEventListener('DOMContentLoaded', e => {
+document.addEventListener('DOMContentLoaded', () => {
   const UI = new _components_Ui__WEBPACK_IMPORTED_MODULE_3__.default();
   UI.renderUi();
   UI.deleteProject();

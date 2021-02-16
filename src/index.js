@@ -8,7 +8,7 @@ const store = [
 
 
 const data = document.querySelector('.submit-btn');
-data.addEventListener('click', (e) => {
+data.addEventListener('click', () => {
   const ProjectTitle = document.querySelector('input').value;
   const newProject = new Project(ProjectTitle);
   newProject.renderProject();
@@ -28,7 +28,7 @@ todoBtm.addEventListener('click', (e) => {
 });
 
 
-document.addEventListener('DOMContentLoaded', e => {
+document.addEventListener('DOMContentLoaded', () => {
   const UI = new Ui();
   UI.renderUi();
   UI.deleteProject();

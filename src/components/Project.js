@@ -1,5 +1,5 @@
 import store from '../index';
-import { setLocalStorage, populateStore } from './storage';
+import { setLocalStorage } from './storage';
 
 class Project {
   constructor(projectName) {
