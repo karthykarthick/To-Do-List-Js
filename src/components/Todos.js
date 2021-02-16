@@ -1,5 +1,5 @@
 import { setLocalStorage, store } from './storage';
-import { projectIdx } from './Ui';
+// import { projectIdx } from './Ui';
 
 export const sanitizeName = (text) => text.split(' ').join('');
 
@@ -49,7 +49,7 @@ class Todo {
     this.dueDate = dueDate;
     this.priority = priority;
     this.todoContent = document.querySelector('.todos-content');
-    this.index = projectIdx;
+    // this.index = projectIdx;
   }
 
   get showContent() {
@@ -71,54 +71,54 @@ class Todo {
         `;
   }
 
-  editTask() {
+  editTask(projectIdx) {
     const btns = document.querySelectorAll('.edit-btn');
     const editForms = [...document.querySelectorAll('.edit-form')].reverse();
 
     btns.forEach(btn => {
       btn.addEventListener('click', e => {
-        const todoIndex = store[this.index]
+        const todoIndex = store[projectIdx]
           .todos
           .findIndex(todo => sanitizeName(todo.title) === e.target.dataset.edit);
         editForms[todoIndex].insertAdjacentHTML('afterbegin', editForm());
 
-        this.changeValues(todoIndex);
+        this.changeValues(projectIdx, todoIndex);
       });
     });
   }
 
-  changeValues(idx) {
+  changeValues(projectIdx, idx) {
     const editBtn = document.querySelector('.edit-form-btn');
     editBtn.addEventListener('click', () => {
       const editedTitle = document.querySelector('.edit-title').value;
       const editedDescription = document.querySelector('.edit-description').value;
       const editedDate = document.querySelector('.edit-date').value;
       const editedPriority = document.querySelector('#edit-priority').value;
-      store[this.index].todos[idx].title = editedTitle;
-      store[this.index].todos[idx].description = editedDescription;
-      store[this.index].todos[idx].dueDate = editedDate;
-      store[this.index].todos[idx].priority = editedPriority;
+      store[projectIdx].todos[idx].title = editedTitle;
+      store[projectIdx].todos[idx].description = editedDescription;
+      store[projectIdx].todos[idx].dueDate = editedDate;
+      store[projectIdx].todos[idx].priority = editedPriority;
       setLocalStorage();
     });
   }
 
 
-  deleteButton() {
+  deleteButton(projectIdx) {
     const data = document.querySelectorAll('.del-data');
     data.forEach(btn => {
       btn.addEventListener('click', e => {
-        const idxToDelete = store[this.index]
+        const idxToDelete = store[projectIdx]
           .todos.findIndex(td => td.title === e
             .target.dataset.name);
         removeChildDOM(sanitizeName(e.target.dataset.name));
-        store[this.index].todos.splice(idxToDelete, 1);
+        store[projectIdx].todos.splice(idxToDelete, 1);
         setLocalStorage();
       });
     });
   }
 
-  storeTodo() {
-    store[this.index].todos.push({
+  storeTodo(projectIdx) {
+    store[projectIdx].todos.push({
       title: this.title,
       description: this.description,
       dueDate: this.dueDate,
@@ -127,9 +127,9 @@ class Todo {
     setLocalStorage();
   }
 
-  renderTodo() {
+  renderTodo(projectIdx) {
     this.todoContent.insertAdjacentHTML('afterbegin', this.showContent);
-    this.storeTodo();
+    this.storeTodo(projectIdx);
     this.deleteButton();
     this.editTask();
   }

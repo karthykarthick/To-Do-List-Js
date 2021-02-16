@@ -57,9 +57,9 @@ export default class Ui {
       this.todosConent.insertAdjacentHTML('afterbegin', todoCard);
     });
     const todos = new Todo();
-    todos.deleteButton();
+    todos.deleteButton(projectIdx);
+    todos.editTask(projectIdx);
     // todos.completedTask();
-    todos.editTask();
   }
 
 

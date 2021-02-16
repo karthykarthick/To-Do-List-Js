@@ -92,9 +92,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
-/* harmony import */ var _Ui__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Ui */ "./src/components/Ui.js");
 
-
+// import { projectIdx } from './Ui';
 
 const sanitizeName = (text) => text.split(' ').join('');
 
@@ -144,7 +143,7 @@ class Todo {
     this.dueDate = dueDate;
     this.priority = priority;
     this.todoContent = document.querySelector('.todos-content');
-    this.index = _Ui__WEBPACK_IMPORTED_MODULE_1__.projectIdx;
+    // this.index = projectIdx;
   }
 
   get showContent() {
@@ -166,54 +165,54 @@ class Todo {
         `;
   }
 
-  editTask() {
+  editTask(projectIdx) {
     const btns = document.querySelectorAll('.edit-btn');
     const editForms = [...document.querySelectorAll('.edit-form')].reverse();
 
     btns.forEach(btn => {
       btn.addEventListener('click', e => {
-        const todoIndex = _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index]
+        const todoIndex = _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx]
           .todos
           .findIndex(todo => sanitizeName(todo.title) === e.target.dataset.edit);
         editForms[todoIndex].insertAdjacentHTML('afterbegin', editForm());
 
-        this.changeValues(todoIndex);
+        this.changeValues(projectIdx, todoIndex);
       });
     });
   }
 
-  changeValues(idx) {
+  changeValues(projectIdx, idx) {
     const editBtn = document.querySelector('.edit-form-btn');
     editBtn.addEventListener('click', () => {
       const editedTitle = document.querySelector('.edit-title').value;
       const editedDescription = document.querySelector('.edit-description').value;
       const editedDate = document.querySelector('.edit-date').value;
       const editedPriority = document.querySelector('#edit-priority').value;
-      _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index].todos[idx].title = editedTitle;
-      _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index].todos[idx].description = editedDescription;
-      _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index].todos[idx].dueDate = editedDate;
-      _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index].todos[idx].priority = editedPriority;
+      _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx].todos[idx].title = editedTitle;
+      _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx].todos[idx].description = editedDescription;
+      _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx].todos[idx].dueDate = editedDate;
+      _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx].todos[idx].priority = editedPriority;
       (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
     });
   }
 
 
-  deleteButton() {
+  deleteButton(projectIdx) {
     const data = document.querySelectorAll('.del-data');
     data.forEach(btn => {
       btn.addEventListener('click', e => {
-        const idxToDelete = _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index]
+        const idxToDelete = _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx]
           .todos.findIndex(td => td.title === e
             .target.dataset.name);
         removeChildDOM(sanitizeName(e.target.dataset.name));
-        _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index].todos.splice(idxToDelete, 1);
+        _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx].todos.splice(idxToDelete, 1);
         (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
       });
     });
   }
 
-  storeTodo() {
-    _storage__WEBPACK_IMPORTED_MODULE_0__.store[this.index].todos.push({
+  storeTodo(projectIdx) {
+    _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx].todos.push({
       title: this.title,
       description: this.description,
       dueDate: this.dueDate,
@@ -222,9 +221,9 @@ class Todo {
     (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
   }
 
-  renderTodo() {
+  renderTodo(projectIdx) {
     this.todoContent.insertAdjacentHTML('afterbegin', this.showContent);
-    this.storeTodo();
+    this.storeTodo(projectIdx);
     this.deleteButton();
     this.editTask();
   }
@@ -307,9 +306,9 @@ class Ui {
       this.todosConent.insertAdjacentHTML('afterbegin', todoCard);
     });
     const todos = new _Todos__WEBPACK_IMPORTED_MODULE_1__.default();
-    todos.deleteButton();
+    todos.deleteButton(projectIdx);
+    todos.editTask(projectIdx);
     // todos.completedTask();
-    todos.editTask();
   }
 
 
@@ -449,13 +448,13 @@ todoBtm.addEventListener('click', (e) => {
   const priority = document.querySelector('#priority').value;
   const todo = new _components_Todos__WEBPACK_IMPORTED_MODULE_2__.default(title, description, dueDate, priority);
   todoForm.classList.add('d-none');
-  todo.renderTodo();
+  todo.renderTodo(_components_Ui__WEBPACK_IMPORTED_MODULE_3__.projectIdx);
 });
 
 
 document.addEventListener('DOMContentLoaded', () => {
   const UI = new _components_Ui__WEBPACK_IMPORTED_MODULE_3__.default();
-  UI.renderUi();
+  UI.renderUi(_components_Ui__WEBPACK_IMPORTED_MODULE_3__.projectIdx);
   (0,_components_Project__WEBPACK_IMPORTED_MODULE_1__.deleteProject)();
   UI.addBtn();
   UI.showTodos();

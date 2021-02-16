@@ -1,7 +1,7 @@
 import './scss/styles.scss';
 import Project, { deleteProject } from './components/Project';
 import Todo from './components/Todos';
-import Ui from './components/Ui';
+import Ui, { projectIdx } from './components/Ui';
 
 
 const data = document.querySelector('.submit-btn');
@@ -21,13 +21,13 @@ todoBtm.addEventListener('click', (e) => {
   const priority = document.querySelector('#priority').value;
   const todo = new Todo(title, description, dueDate, priority);
   todoForm.classList.add('d-none');
-  todo.renderTodo();
+  todo.renderTodo(projectIdx);
 });
 
 
 document.addEventListener('DOMContentLoaded', () => {
   const UI = new Ui();
-  UI.renderUi();
+  UI.renderUi(projectIdx);
   deleteProject();
   UI.addBtn();
   UI.showTodos();
