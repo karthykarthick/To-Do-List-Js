@@ -1,5 +1,4 @@
 import { setLocalStorage, store } from './storage';
-// import { projectIdx } from './Ui';
 
 export const sanitizeName = (text) => text.split(' ').join('');
 
@@ -30,17 +29,17 @@ const editForm = () => (`
           `
 );
 
-// const completedTask = () => {
-//   const btns = document.querySelectorAll('.complete-btn');
+export const completedTask = () => {
+  const btns = document.querySelectorAll('.complete-btn');
 
-//   btns.forEach(btn => {
-//     btn.addEventListener('click', e => {
-//       const card = document.querySelector(`#${e.target.dataset.sucess}`);
-//       card.classList.toggle('border');
-//       card.classList.toggle('border-success');
-//     });
-//   });
-// };
+  btns.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const card = document.querySelector(`#${e.target.dataset.sucess}`);
+      card.classList.toggle('border');
+      card.classList.toggle('border-success');
+    });
+  });
+};
 
 const changeValues = (projectIdx, idx) => {
   const editBtn = document.querySelector('.edit-form-btn');
@@ -94,7 +93,6 @@ class Todo {
     this.dueDate = dueDate;
     this.priority = priority;
     this.todoContent = document.querySelector('.todos-content');
-    // this.index = projectIdx;
   }
 
   get showContent() {

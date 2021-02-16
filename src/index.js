@@ -1,4 +1,3 @@
-import './scss/styles.scss';
 import Project, { deleteProject } from './components/Project';
 import Todo from './components/Todos';
 import Ui, { projectIdx } from './components/Ui';

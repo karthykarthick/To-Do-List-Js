@@ -1,5 +1,5 @@
 import { populateStore, store } from './storage';
-import { sanitizeName, editTask, deleteButton } from './Todos';
+import { sanitizeName, editTask, deleteButton, completedTask } from './Todos';
 
 export let projectIdx = 0;
 
@@ -58,7 +58,7 @@ export default class Ui {
     });
     deleteButton(projectIdx);
     editTask(projectIdx);
-    // todos.completedTask();
+    completedTask();
   }
 
 
