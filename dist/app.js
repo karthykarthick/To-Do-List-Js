@@ -90,6 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "sanitizeName": () => (/* binding */ sanitizeName),
 /* harmony export */   "removeChildDOM": () => (/* binding */ removeChildDOM),
 /* harmony export */   "editTask": () => (/* binding */ editTask),
+/* harmony export */   "deleteButton": () => (/* binding */ deleteButton),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
@@ -168,6 +169,20 @@ const editTask = (projectIdx) => {
   });
 };
 
+const deleteButton = (projectIdx) => {
+  const data = document.querySelectorAll('.del-data');
+  data.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const idxToDelete = _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx]
+        .todos.findIndex(td => td.title === e
+          .target.dataset.name);
+      removeChildDOM(sanitizeName(e.target.dataset.name));
+      _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx].todos.splice(idxToDelete, 1);
+      (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
+    });
+  });
+};
+
 class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
@@ -197,20 +212,6 @@ class Todo {
         `;
   }
 
-  deleteButton(projectIdx) {
-    const data = document.querySelectorAll('.del-data');
-    data.forEach(btn => {
-      btn.addEventListener('click', e => {
-        const idxToDelete = _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx]
-          .todos.findIndex(td => td.title === e
-            .target.dataset.name);
-        removeChildDOM(sanitizeName(e.target.dataset.name));
-        _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx].todos.splice(idxToDelete, 1);
-        (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
-      });
-    });
-  }
-
   storeTodo(projectIdx) {
     _storage__WEBPACK_IMPORTED_MODULE_0__.store[projectIdx].todos.push({
       title: this.title,
@@ -224,8 +225,8 @@ class Todo {
   renderTodo(projectIdx) {
     this.todoContent.insertAdjacentHTML('afterbegin', this.showContent);
     this.storeTodo(projectIdx);
-    this.deleteButton();
-    editTask();
+    deleteButton(projectIdx);
+    editTask(projectIdx);
   }
 }
 
@@ -305,8 +306,7 @@ class Ui {
         `;
       this.todosConent.insertAdjacentHTML('afterbegin', todoCard);
     });
-    const todos = new _Todos__WEBPACK_IMPORTED_MODULE_1__.default();
-    todos.deleteButton(projectIdx);
+    (0,_Todos__WEBPACK_IMPORTED_MODULE_1__.deleteButton)(projectIdx);
     (0,_Todos__WEBPACK_IMPORTED_MODULE_1__.editTask)(projectIdx);
     // todos.completedTask();
   }

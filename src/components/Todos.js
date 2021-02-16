@@ -73,6 +73,20 @@ export const editTask = (projectIdx) => {
   });
 };
 
+export const deleteButton = (projectIdx) => {
+  const data = document.querySelectorAll('.del-data');
+  data.forEach(btn => {
+    btn.addEventListener('click', e => {
+      const idxToDelete = store[projectIdx]
+        .todos.findIndex(td => td.title === e
+          .target.dataset.name);
+      removeChildDOM(sanitizeName(e.target.dataset.name));
+      store[projectIdx].todos.splice(idxToDelete, 1);
+      setLocalStorage();
+    });
+  });
+};
+
 class Todo {
   constructor(title, description, dueDate, priority) {
     this.title = title;
@@ -102,20 +116,6 @@ class Todo {
         `;
   }
 
-  deleteButton(projectIdx) {
-    const data = document.querySelectorAll('.del-data');
-    data.forEach(btn => {
-      btn.addEventListener('click', e => {
-        const idxToDelete = store[projectIdx]
-          .todos.findIndex(td => td.title === e
-            .target.dataset.name);
-        removeChildDOM(sanitizeName(e.target.dataset.name));
-        store[projectIdx].todos.splice(idxToDelete, 1);
-        setLocalStorage();
-      });
-    });
-  }
-
   storeTodo(projectIdx) {
     store[projectIdx].todos.push({
       title: this.title,
@@ -129,8 +129,8 @@ class Todo {
   renderTodo(projectIdx) {
     this.todoContent.insertAdjacentHTML('afterbegin', this.showContent);
     this.storeTodo(projectIdx);
-    this.deleteButton();
-    editTask();
+    deleteButton(projectIdx);
+    editTask(projectIdx);
   }
 }
 
