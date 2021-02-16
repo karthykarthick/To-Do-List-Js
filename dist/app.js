@@ -264,6 +264,7 @@ class Ui {
 
     addBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         todoForm.classList.remove('d-none');
         projectIdx = _storage__WEBPACK_IMPORTED_MODULE_0__.store.findIndex(pj => pj.projectName === e.target.dataset.name);
         this.displayTodos();
@@ -277,12 +278,8 @@ class Ui {
 
     projects.forEach(project => {
       project.addEventListener('click', e => {
-        _storage__WEBPACK_IMPORTED_MODULE_0__.store.findIndex((pj, index) => {
-          if (sanitizeName(pj.projectName) === e.target.id) {
-            projectIdx = index;
-            this.displayTodos();
-          }
-        });
+        projectIdx = _storage__WEBPACK_IMPORTED_MODULE_0__.store.findIndex(pj => sanitizeName(pj.projectName) === e.target.id);
+        this.displayTodos();
       });
     });
   }

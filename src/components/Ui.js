@@ -22,6 +22,7 @@ export default class Ui {
 
     addBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         todoForm.classList.remove('d-none');
         projectIdx = store.findIndex(pj => pj.projectName === e.target.dataset.name);
         this.displayTodos();
@@ -35,12 +36,8 @@ export default class Ui {
 
     projects.forEach(project => {
       project.addEventListener('click', e => {
-        store.findIndex((pj, index) => {
-          if (sanitizeName(pj.projectName) === e.target.id) {
-            projectIdx = index;
-            this.displayTodos();
-          }
-        });
+        projectIdx = store.findIndex(pj => sanitizeName(pj.projectName) === e.target.id);
+        this.displayTodos();
       });
     });
   }
