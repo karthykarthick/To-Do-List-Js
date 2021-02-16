@@ -1,14 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-use-before-define */
-/* eslint-disable array-callback-return */
-/* eslint-disable linebreak-style */
-/* eslint-disable eqeqeq */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable linebreak-style */
-/* eslint-disable import/no-mutable-exports */
-/* eslint-disable linebreak-style */
-/* eslint-disable import/no-cycle */
-/* eslint-disable linebreak-style */
 import store from '../index';
 import { populateStore, setLocalStorage } from './storage';
 import Todo from './Todos';

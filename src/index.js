@@ -1,8 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable linebreak-style */
-/* eslint-disable import/no-cycle */
-/* eslint-disable linebreak-style */
 import './scss/styles.scss';
 import Project from './components/Project';
 import Todo from './components/Todos';

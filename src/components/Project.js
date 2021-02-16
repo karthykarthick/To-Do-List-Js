@@ -1,9 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-unused-vars */
-/* eslint-disable linebreak-style */
-// eslint-disable-next-line linebreak-style
-/* eslint-disable import/no-cycle */
-/* eslint-disable linebreak-style */
 import store from '../index';
 import { setLocalStorage, populateStore } from './storage';
 

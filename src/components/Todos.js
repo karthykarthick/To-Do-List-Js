@@ -1,10 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable max-len */
-/* eslint-disable linebreak-style */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable linebreak-style */
-/* eslint-disable import/no-cycle */
-/* eslint-disable linebreak-style */
 import store from '../index';
 import { setLocalStorage } from './storage';
 import { projectIdx, sanitizeName } from './Ui';
