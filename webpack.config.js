@@ -26,7 +26,15 @@ module.exports = {
   module: {
     rules: [
       sassRules,
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      }
     ],
+  },
+  resolve: {
+    extensions: ['*', '.js']
   },
   plugins: [new HtmlWebpackPlugin({
     title: 'Title fo your project',
