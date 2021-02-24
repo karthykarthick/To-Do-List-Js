@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Project from './../components/Project'
 
 describe('Project class', () => {
