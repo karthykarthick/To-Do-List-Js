@@ -103,7 +103,7 @@ export default class Todos {
   }
 
   saveTodo() {
-    storeTodos(this.title, this.description, this.dueDate, this.priority);
+    storeTodos(this.title, this.description, this.dueDate, this.priority, store, currentIndex.id);
     setLocalStorage();
   }
 

@@ -7,7 +7,7 @@ const storeProject = (projectName, storage) => {
   });
 };
 
-const storeTodos = (title, description, date, priority) => store[currentIndex.id]
+const storeTodos = (title, description, date, priority, storage, projectId) => storage[projectId]
   .todos
   .push(
     {

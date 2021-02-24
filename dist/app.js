@@ -161,7 +161,7 @@ var Todos = /*#__PURE__*/function () {
   }, {
     key: "saveTodo",
     value: function saveTodo() {
-      (0,_common__WEBPACK_IMPORTED_MODULE_0__.storeTodos)(this.title, this.description, this.dueDate, this.priority);
+      (0,_common__WEBPACK_IMPORTED_MODULE_0__.storeTodos)(this.title, this.description, this.dueDate, this.priority, _storage__WEBPACK_IMPORTED_MODULE_1__.store, _storage__WEBPACK_IMPORTED_MODULE_1__.currentIndex.id);
       (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
     }
   }, {
@@ -294,8 +294,8 @@ var storeProject = function storeProject(projectName, storage) {
   });
 };
 
-var storeTodos = function storeTodos(title, description, date, priority) {
-  return _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id].todos.push({
+var storeTodos = function storeTodos(title, description, date, priority, storage, projectId) {
+  return storage[projectId].todos.push({
     title: title,
     description: description,
     date: date,
