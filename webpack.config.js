@@ -26,6 +26,13 @@ module.exports = {
   module: {
     rules: [
       sassRules,
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
     ],
   },
   plugins: [new HtmlWebpackPlugin({
