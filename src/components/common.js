@@ -88,17 +88,17 @@ export {
   updateTodo,
 };
 
-// module.exports = {
-//   storeProject: storeProject,
-//   storeTodos: storeTodos,
-//   renderProjects: renderProjects,
-//   sanitizeId: sanitizeId,
-//   getProjectIndex: getProjectIndex,
-//   deleteElementFromDOM: deleteElementFromDOM,
-//   displayTodoForm: displayTodoForm,
-//   hideTodoForm: hideTodoForm,
-//   renderTodos: renderTodos,
-//   getBtns: getBtns,
-//   getTaskIndex: getTaskIndex,
-//   updateTodo: updateTodo,
-// };
+module.exports = {
+  storeProject: storeProject,
+  storeTodos: storeTodos,
+  renderProjects: renderProjects,
+  sanitizeId: sanitizeId,
+  getProjectIndex: getProjectIndex,
+  deleteElementFromDOM: deleteElementFromDOM,
+  displayTodoForm: displayTodoForm,
+  hideTodoForm: hideTodoForm,
+  renderTodos: renderTodos,
+  getBtns: getBtns,
+  getTaskIndex: getTaskIndex,
+  updateTodo: updateTodo,
+};
