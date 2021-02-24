@@ -1,1 +1,7 @@
-@import './base/reset'
+.todo-form-container {
+  display: none;
+}
+
+.show {
+  display: initial;
+}

@@ -1,48 +1,27 @@
+/* eslint-disable class-methods-use-this */
 import { setLocalStorage, store } from './storage';
-import { removeChildDOM } from './Todos';
+import { storeProject, deleteElementFromDOM, getProjectIndex } from './common';
 
-export const deleteProject = () => {
-  const deleteBtns = document.querySelectorAll('.deleteProject');
-  deleteBtns.forEach(deleteBtn => {
-    deleteBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      store.forEach((obj, idx) => {
-        if (obj.projectName === deleteBtn.dataset.name) {
-          store.splice(idx, 1);
-          setLocalStorage();
-          removeChildDOM((deleteBtn.dataset.name).split(' ').join(''));
-        }
+export default class Project {
+  constructor(name) {
+    this.name = name;
+  }
+
+  deleteProject() {
+    const btns = document.querySelectorAll('.delete-pj-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const projectIndex = getProjectIndex(e.target.dataset.id);
+        store.splice(projectIndex, 1);
+        setLocalStorage();
+        deleteElementFromDOM(e.target.dataset.id);
       });
     });
-  });
-};
-
-class Project {
-  constructor(projectName) {
-    this.projectName = projectName;
-    this.projectContent = document.querySelector('.project-content');
   }
 
-  get showName() {
-    return `
-              <li class="project list-group-item">${this.projectName}</li>
-            `;
-  }
-
-
-  storeProjectName() {
-    store.push({
-      projectName: `${this.projectName}`,
-      id: store.length,
-      todos: [],
-    });
-  }
-
-  renderProject() {
-    this.projectContent.insertAdjacentHTML('afterbegin', this.showName);
-    this.storeProjectName();
+  saveProject() {
+    storeProject(this.name);
     setLocalStorage();
   }
 }
-
-export default Project;
