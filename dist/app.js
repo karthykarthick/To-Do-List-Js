@@ -2,18 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/scss/styles.scss":
-/*!******************************!*\
-  !*** ./src/scss/styles.scss ***!
-  \******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
 /***/ "./src/components/Project.js":
 /*!***********************************!*\
   !*** ./src/components/Project.js ***!
@@ -26,33 +14,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common */ "./src/components/common.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 /* eslint-disable class-methods-use-this */
 
 
 
-class Project {
-  constructor(name) {
+var Project = /*#__PURE__*/function () {
+  function Project(name) {
+    _classCallCheck(this, Project);
+
     this.name = name;
   }
 
-  deleteProject() {
-    const btns = document.querySelectorAll('.delete-pj-btn');
-    btns.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const projectIndex = (0,_common__WEBPACK_IMPORTED_MODULE_1__.getProjectIndex)(e.target.dataset.id);
-        _storage__WEBPACK_IMPORTED_MODULE_0__.store.splice(projectIndex, 1);
-        (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
-        (0,_common__WEBPACK_IMPORTED_MODULE_1__.deleteElementFromDOM)(e.target.dataset.id);
+  _createClass(Project, [{
+    key: "deleteProject",
+    value: function deleteProject() {
+      var btns = document.querySelectorAll('.delete-pj-btn');
+      btns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var projectIndex = (0,_common__WEBPACK_IMPORTED_MODULE_1__.getProjectIndex)(e.target.dataset.id);
+          _storage__WEBPACK_IMPORTED_MODULE_0__.store.splice(projectIndex, 1);
+          (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
+          (0,_common__WEBPACK_IMPORTED_MODULE_1__.deleteElementFromDOM)(e.target.dataset.id);
+        });
       });
-    });
-  }
+    }
+  }, {
+    key: "saveProject",
+    value: function saveProject() {
+      (0,_common__WEBPACK_IMPORTED_MODULE_1__.storeProject)(this.name);
+      (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
+    }
+  }]);
 
-  saveProject() {
-    (0,_common__WEBPACK_IMPORTED_MODULE_1__.storeProject)(this.name);
-    (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
-  }
-}
+  return Project;
+}();
+
 
 
 /***/ }),
@@ -69,54 +72,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./common */ "./src/components/common.js");
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 /* eslint-disable class-methods-use-this */
 
 
 
-const editForm = () => (`
-        <div class="container">
-          <form>
-            <label>title
-              <input type="text" class="form-control edit-title"></input>
-            </label>
-            <label>
-              description
-              <input type="text" class="form-control edit-description"></input>
-            </label>
-            <label> Due Date
-              <input type="date" class="form-control edit-date"></input>
-            </label>
-            <label class="form-label">
-              <select name="edit-priority" id="edit-priority" class="form-control">
-                <option value="high">High</option>
-                <option value="medium">medium</option>
-                <option value="low">low</option>
-            </select>
-          </label>
-            <button type="submit" class="edit-form-btn btn btn-success">Edit</button>
-          </form>
-        </div>
-          `
-);
+var editForm = function editForm() {
+  return "\n        <div class=\"container\">\n          <form>\n            <label>title\n              <input type=\"text\" class=\"form-control edit-title\"></input>\n            </label>\n            <label>\n              description\n              <input type=\"text\" class=\"form-control edit-description\"></input>\n            </label>\n            <label> Due Date\n              <input type=\"date\" class=\"form-control edit-date\"></input>\n            </label>\n            <label class=\"form-label\">\n              <select name=\"edit-priority\" id=\"edit-priority\" class=\"form-control\">\n                <option value=\"high\">High</option>\n                <option value=\"medium\">medium</option>\n                <option value=\"low\">low</option>\n            </select>\n          </label>\n            <button type=\"submit\" class=\"edit-form-btn btn btn-success\">Edit</button>\n          </form>\n        </div>\n          ";
+};
 
-const updateTask = () => {
-  const editBtn = document.querySelector('.edit-form-btn');
-
-  editBtn.addEventListener('click', () => {
-    const editedTitle = document.querySelector('.edit-title').value;
-    const editedDescription = document.querySelector('.edit-description').value;
-    const editedDate = document.querySelector('.edit-date').value;
-    const editedPriority = document.querySelector('#edit-priority').value;
-
+var updateTask = function updateTask() {
+  var editBtn = document.querySelector('.edit-form-btn');
+  editBtn.addEventListener('click', function () {
+    var editedTitle = document.querySelector('.edit-title').value;
+    var editedDescription = document.querySelector('.edit-description').value;
+    var editedDate = document.querySelector('.edit-date').value;
+    var editedPriority = document.querySelector('#edit-priority').value;
     (0,_common__WEBPACK_IMPORTED_MODULE_0__.updateTodo)(editedTitle, editedDescription, editedDate, editedPriority);
     (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
   });
 };
 
-const btnText = (text) => (text === 'Complete' ? 'Uncomplete' : 'Complete');
+var btnText = function btnText(text) {
+  return text === 'Complete' ? 'Uncomplete' : 'Complete';
+};
 
-class Todos {
-  constructor(title, description, dueDate, priority) {
+var Todos = /*#__PURE__*/function () {
+  function Todos(title, description, dueDate, priority) {
+    _classCallCheck(this, Todos);
+
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -126,65 +115,81 @@ class Todos {
     this.editformContainer = document.querySelector('.todo-edit-form-container');
   }
 
-  showForm() {
-    const addBtns = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getBtns)('.add-todo-btn');
+  _createClass(Todos, [{
+    key: "showForm",
+    value: function showForm() {
+      var _this = this;
 
-    addBtns.forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        (0,_common__WEBPACK_IMPORTED_MODULE_0__.displayTodoForm)(this.todoForm);
-        _storage__WEBPACK_IMPORTED_MODULE_1__.currentIndex.id = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getProjectIndex)(e.target.dataset.id);
-        (0,_common__WEBPACK_IMPORTED_MODULE_0__.renderTodos)(this.todos);
-        this.deleteTodo();
+      var addBtns = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getBtns)('.add-todo-btn');
+      addBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          (0,_common__WEBPACK_IMPORTED_MODULE_0__.displayTodoForm)(_this.todoForm);
+          _storage__WEBPACK_IMPORTED_MODULE_1__.currentIndex.id = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getProjectIndex)(e.target.dataset.id);
+          (0,_common__WEBPACK_IMPORTED_MODULE_0__.renderTodos)(_this.todos);
+
+          _this.deleteTodo();
+        });
       });
-    });
-  }
-
-  deleteTodo() {
-    const deleteBtns = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getBtns)('.btn-delete-task');
-    deleteBtns.forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        const selectedTask = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getTaskIndex)(e.target.dataset.id);
-        _storage__WEBPACK_IMPORTED_MODULE_1__.store[_storage__WEBPACK_IMPORTED_MODULE_1__.currentIndex.id].todos.splice(selectedTask, 1);
-        (0,_common__WEBPACK_IMPORTED_MODULE_0__.deleteElementFromDOM)(e.target.dataset.id);
-        (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
+    }
+  }, {
+    key: "deleteTodo",
+    value: function deleteTodo() {
+      var deleteBtns = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getBtns)('.btn-delete-task');
+      deleteBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var selectedTask = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getTaskIndex)(e.target.dataset.id);
+          _storage__WEBPACK_IMPORTED_MODULE_1__.store[_storage__WEBPACK_IMPORTED_MODULE_1__.currentIndex.id].todos.splice(selectedTask, 1);
+          (0,_common__WEBPACK_IMPORTED_MODULE_0__.deleteElementFromDOM)(e.target.dataset.id);
+          (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
+        });
       });
-    });
-  }
-
-  completeTask() {
-    const completeBtns = document.querySelectorAll('.btn-complete-task');
-    completeBtns.forEach(btn => {
-      btn.addEventListener('click', e => {
-        const card = document.querySelector(`#${e.target.dataset.id}`);
-        card.classList.toggle('border-success');
-        e.target.innerHTML = btnText(e.target.innerHTML);
+    }
+  }, {
+    key: "completeTask",
+    value: function completeTask() {
+      var completeBtns = document.querySelectorAll('.btn-complete-task');
+      completeBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          var card = document.querySelector("#".concat(e.target.dataset.id));
+          card.classList.toggle('border-success');
+          e.target.innerHTML = btnText(e.target.innerHTML);
+        });
       });
-    });
-  }
+    }
+  }, {
+    key: "saveTodo",
+    value: function saveTodo() {
+      (0,_common__WEBPACK_IMPORTED_MODULE_0__.storeTodos)(this.title, this.description, this.dueDate, this.priority);
+      (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
+    }
+  }, {
+    key: "showEditForm",
+    value: function showEditForm() {
+      this.editformContainer.insertAdjacentHTML('afterbegin', editForm());
+    }
+  }, {
+    key: "editform",
+    value: function editform() {
+      var _this2 = this;
 
-  saveTodo() {
-    (0,_common__WEBPACK_IMPORTED_MODULE_0__.storeTodos)(this.title, this.description, this.dueDate, this.priority);
-    (0,_storage__WEBPACK_IMPORTED_MODULE_1__.setLocalStorage)();
-  }
+      var editBtns = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getBtns)('.btn-edit-task');
+      editBtns.forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          _storage__WEBPACK_IMPORTED_MODULE_1__.currentIndex.taskId = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getTaskIndex)(e.target.dataset.id);
 
-  showEditForm() {
-    this.editformContainer.insertAdjacentHTML('afterbegin', editForm());
-  }
+          _this2.showEditForm();
 
-  editform() {
-    const editBtns = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getBtns)('.btn-edit-task');
-
-    editBtns.forEach(btn => {
-      btn.addEventListener('click', e => {
-        _storage__WEBPACK_IMPORTED_MODULE_1__.currentIndex.taskId = (0,_common__WEBPACK_IMPORTED_MODULE_0__.getTaskIndex)(e.target.dataset.id);
-        this.showEditForm();
-        updateTask();
+          updateTask();
+        });
       });
-    });
-  }
-}
+    }
+  }]);
+
+  return Todos;
+}();
+
 
 
 /***/ }),
@@ -203,42 +208,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./common */ "./src/components/common.js");
 /* harmony import */ var _Project__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Project */ "./src/components/Project.js");
 /* harmony import */ var _Todos__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Todos */ "./src/components/Todos.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
 
 
 
-const pj = new _Project__WEBPACK_IMPORTED_MODULE_2__.default();
-const newTodo = new _Todos__WEBPACK_IMPORTED_MODULE_3__.default();
+var pj = new _Project__WEBPACK_IMPORTED_MODULE_2__.default();
+var newTodo = new _Todos__WEBPACK_IMPORTED_MODULE_3__.default();
 
-class Ui {
-  constructor() {
+var Ui = /*#__PURE__*/function () {
+  function Ui() {
+    _classCallCheck(this, Ui);
+
     this.projectContainer = document.querySelector('.project-list');
     this.todos = document.querySelector('.todos-container');
   }
 
-  showTodos() {
-    const projects = document.querySelectorAll('ul li');
+  _createClass(Ui, [{
+    key: "showTodos",
+    value: function showTodos() {
+      var _this = this;
 
-    projects.forEach(project => {
-      project.addEventListener('click', e => {
-        e.stopPropagation();
-        _storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id = (0,_common__WEBPACK_IMPORTED_MODULE_1__.getProjectIndex)(e.target.id);
-        (0,_common__WEBPACK_IMPORTED_MODULE_1__.renderTodos)(this.todos);
-        newTodo.deleteTodo();
-        newTodo.editform();
-        newTodo.completeTask();
+      var projects = document.querySelectorAll('ul li');
+      projects.forEach(function (project) {
+        project.addEventListener('click', function (e) {
+          e.stopPropagation();
+          _storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id = (0,_common__WEBPACK_IMPORTED_MODULE_1__.getProjectIndex)(e.target.id);
+          (0,_common__WEBPACK_IMPORTED_MODULE_1__.renderTodos)(_this.todos);
+          newTodo.deleteTodo();
+          newTodo.editform();
+          newTodo.completeTask();
+        });
       });
-    });
-  }
+    }
+  }, {
+    key: "renderProject",
+    value: function renderProject() {
+      this.projectContainer.textContent = '';
+      (0,_common__WEBPACK_IMPORTED_MODULE_1__.renderProjects)(this.projectContainer);
+      pj.deleteProject();
+      newTodo.showForm();
+    }
+  }]);
 
-  renderProject() {
-    this.projectContainer.textContent = '';
-    (0,_common__WEBPACK_IMPORTED_MODULE_1__.renderProjects)(this.projectContainer);
-    pj.deleteProject();
-    newTodo.showForm();
-  }
-}
+  return Ui;
+}();
+
+
 
 /***/ }),
 
@@ -266,80 +287,90 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
 
 
-const storeProject = (projectName) => {
+var storeProject = function storeProject(projectName) {
   _storage__WEBPACK_IMPORTED_MODULE_0__.store.push({
-    projectName,
-    todos: [],
+    projectName: projectName,
+    todos: []
   });
 };
 
-const storeTodos = (title, description, date, priority) => _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id]
-  .todos
-  .push(
-    {
-      title,
-      description,
-      date,
-      priority,
-    },
-  );
+var storeTodos = function storeTodos(title, description, date, priority) {
+  return _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id].todos.push({
+    title: title,
+    description: description,
+    date: date,
+    priority: priority
+  });
+};
 
-const sanitizeId = (text) => text.split(' ').join('');
+var sanitizeId = function sanitizeId(text) {
+  return text.split(' ').join('');
+};
 
-const updateTodo = (newTitle, newDescription, newDate, newPriority) => {
+var updateTodo = function updateTodo(newTitle, newDescription, newDate, newPriority) {
   _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id].todos[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.taskId].title = newTitle;
   _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id].todos[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.taskId].description = newDescription;
   _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id].todos[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.taskId].date = newDate;
   _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id].todos[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.taskId].priority = newPriority;
 };
 
-const renderProjects = (container) => {
-  _storage__WEBPACK_IMPORTED_MODULE_0__.store.forEach(project => {
-    const li = `
-                <li class="list-group-item" id="${sanitizeId(project.projectName)}">${project.projectName}
-                  <span class="float-right">
-                    <i class="fa fa-times mr-2 delete-pj-btn" data-id="${sanitizeId(project.projectName)}"></i>
-                    <i class="fas fa-plus mr-4 add-todo-btn" data-id="${sanitizeId(project.projectName)}"></i>
-
-                  </span>
-                </li>
-                `;
+var renderProjects = function renderProjects(container) {
+  _storage__WEBPACK_IMPORTED_MODULE_0__.store.forEach(function (project) {
+    var li = "\n                <li class=\"list-group-item\" id=\"".concat(sanitizeId(project.projectName), "\">").concat(project.projectName, "\n                  <span class=\"float-right\">\n                    <i class=\"fa fa-times mr-2 delete-pj-btn\" data-id=\"").concat(sanitizeId(project.projectName), "\"></i>\n                    <i class=\"fas fa-plus mr-4 add-todo-btn\" data-id=\"").concat(sanitizeId(project.projectName), "\"></i>\n\n                  </span>\n                </li>\n                ");
     container.insertAdjacentHTML('afterbegin', li);
   });
 };
 
-const renderTodos = (container) => {
+var renderTodos = function renderTodos(container) {
   container.innerHTML = '';
-  _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id].todos.forEach(todo => {
-    const card = `
-      <div class="card" id="${sanitizeId(todo.title)}">
-        <h2 class="h2">${todo.title}</h2>
-        <p>${todo.description}</p>
-        <p>Due Date: ${todo.date}</p>
-        <span>priority: ${todo.priority}</span>
-        <div>
-          <div class="btn btn-success btn-complete-task" data-id="${sanitizeId(todo.title)}">Complete</div>
-          <div class="btn btn-warning btn-edit-task" data-id="${sanitizeId(todo.title)}">Edit</div>
-          <div class="btn btn-danger btn-delete-task" data-id="${sanitizeId(todo.title)}">Delete</div>
-        </div>
-      </div>
-    `;
+  _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id].todos.forEach(function (todo) {
+    var card = "\n      <div class=\"card\" id=\"".concat(sanitizeId(todo.title), "\">\n        <h2 class=\"h2\">").concat(todo.title, "</h2>\n        <p>").concat(todo.description, "</p>\n        <p>Due Date: ").concat(todo.date, "</p>\n        <span>priority: ").concat(todo.priority, "</span>\n        <div>\n          <div class=\"btn btn-success btn-complete-task\" data-id=\"").concat(sanitizeId(todo.title), "\">Complete</div>\n          <div class=\"btn btn-warning btn-edit-task\" data-id=\"").concat(sanitizeId(todo.title), "\">Edit</div>\n          <div class=\"btn btn-danger btn-delete-task\" data-id=\"").concat(sanitizeId(todo.title), "\">Delete</div>\n        </div>\n      </div>\n    ");
     container.insertAdjacentHTML('afterbegin', card);
   });
 };
 
-const deleteElementFromDOM = (id) => document.querySelector(`#${id}`).remove();
+var deleteElementFromDOM = function deleteElementFromDOM(id) {
+  return document.querySelector("#".concat(id)).remove();
+};
 
-const getProjectIndex = (id) => _storage__WEBPACK_IMPORTED_MODULE_0__.store.findIndex(pj => sanitizeId(pj.projectName) === id);
-const getTaskIndex = (id) => _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id]
-  .todos
-  .findIndex(task => sanitizeId(task.title) === id);
+var getProjectIndex = function getProjectIndex(id) {
+  return _storage__WEBPACK_IMPORTED_MODULE_0__.store.findIndex(function (pj) {
+    return sanitizeId(pj.projectName) === id;
+  });
+};
 
-const displayTodoForm = (element) => element.classList.add('show');
-const hideTodoForm = (element) => element.classList.remove('show');
-const getBtns = (classElemnt) => document.querySelectorAll(`${classElemnt}`);
+var getTaskIndex = function getTaskIndex(id) {
+  return _storage__WEBPACK_IMPORTED_MODULE_0__.store[_storage__WEBPACK_IMPORTED_MODULE_0__.currentIndex.id].todos.findIndex(function (task) {
+    return sanitizeId(task.title) === id;
+  });
+};
 
+var displayTodoForm = function displayTodoForm(element) {
+  return element.classList.add('show');
+};
 
+var hideTodoForm = function hideTodoForm(element) {
+  return element.classList.remove('show');
+};
+
+var getBtns = function getBtns(classElemnt) {
+  return document.querySelectorAll("".concat(classElemnt));
+};
+
+ // module.exports = {
+//   storeProject: storeProject,
+//   storeTodos: storeTodos,
+//   renderProjects: renderProjects,
+//   sanitizeId: sanitizeId,
+//   getProjectIndex: getProjectIndex,
+//   deleteElementFromDOM: deleteElementFromDOM,
+//   displayTodoForm: displayTodoForm,
+//   hideTodoForm: hideTodoForm,
+//   renderTodos: renderTodos,
+//   getBtns: getBtns,
+//   getTaskIndex: getTaskIndex,
+//   updateTodo: updateTodo,
+// };
 
 /***/ }),
 
@@ -356,24 +387,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "store": () => (/* binding */ store),
 /* harmony export */   "currentIndex": () => (/* binding */ currentIndex)
 /* harmony export */ });
-const store = [
-];
+var store = [];
+var currentIndex = {
+  id: 0,
+  taskId: 0
+};
 
-const currentIndex = { id: 0, taskId: 0 };
-
-const setLocalStorage = () => {
+var setLocalStorage = function setLocalStorage() {
   window.localStorage.setItem('todos', JSON.stringify(store));
 };
 
-const populateStore = () => {
-  const colletion = JSON.parse(window.localStorage.getItem('todos'));
+var populateStore = function populateStore() {
+  var colletion = JSON.parse(window.localStorage.getItem('todos'));
+
   if (colletion) {
-    colletion.forEach(el => {
+    colletion.forEach(function (el) {
       store.push(el);
     });
   }
 };
 
+
+
+/***/ }),
+
+/***/ "./src/scss/styles.scss":
+/*!******************************!*\
+  !*** ./src/scss/styles.scss ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
 
 
 /***/ })
@@ -452,35 +497,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-const UI = new _components_Ui__WEBPACK_IMPORTED_MODULE_2__.default();
-
-const newProjectBtn = document.querySelector('#project-form__btn');
-const projectName = document.querySelector('#project-form__name');
-const todoSubmit = document.querySelector('.submit-todo');
-const todoForm = document.querySelector('.todo-form-container');
-
-
-newProjectBtn.addEventListener('click', e => {
+var UI = new _components_Ui__WEBPACK_IMPORTED_MODULE_2__.default();
+var newProjectBtn = document.querySelector('#project-form__btn');
+var projectName = document.querySelector('#project-form__name');
+var todoSubmit = document.querySelector('.submit-todo');
+var todoForm = document.querySelector('.todo-form-container');
+newProjectBtn.addEventListener('click', function (e) {
   e.preventDefault();
-  const newProject = new _components_Project__WEBPACK_IMPORTED_MODULE_1__.default(projectName.value);
+  var newProject = new _components_Project__WEBPACK_IMPORTED_MODULE_1__.default(projectName.value);
   newProject.saveProject();
   UI.renderProject();
 });
-
-todoSubmit.addEventListener('click', () => {
+todoSubmit.addEventListener('click', function () {
   // e.preventDefault();
-  const title = document.querySelector('.todo-title').value;
-  const description = document.querySelector('.todo-description').value;
-  const dueDate = document.querySelector('.todo-due-date').value;
-  const priority = document.querySelector('#priority').value;
-
-  const Todo = new _components_Todos__WEBPACK_IMPORTED_MODULE_3__.default(title, description, dueDate, priority);
+  var title = document.querySelector('.todo-title').value;
+  var description = document.querySelector('.todo-description').value;
+  var dueDate = document.querySelector('.todo-due-date').value;
+  var priority = document.querySelector('#priority').value;
+  var Todo = new _components_Todos__WEBPACK_IMPORTED_MODULE_3__.default(title, description, dueDate, priority);
   Todo.saveTodo();
   (0,_components_common__WEBPACK_IMPORTED_MODULE_5__.hideTodoForm)(todoForm);
 });
-
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
   (0,_components_storage__WEBPACK_IMPORTED_MODULE_4__.populateStore)();
   UI.renderProject();
   UI.showTodos();
