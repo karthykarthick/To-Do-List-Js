@@ -19,7 +19,23 @@ describe('todos class',()=>{
   })
 
   it('Todo should have the name given', () => {
+    expect(todos.priority).toEqual('priority');
+  })
+
+  it('Todo should have the name given', () => {
     expect(todos.title).not.toEqual('hello');
+  })
+
+  it('Todo should have the name given', () => {
+    expect(todos.title).toEqual('title');
+  })
+
+  it('Todo should have the name given', () => {
+    expect(todos.description).toEqual('description');
+  })
+
+  it('Todo should have the name given', () => {
+    expect(todos.description).not.toEqual('title');
   })
 
   it('should not have a different name than the given', () => {
