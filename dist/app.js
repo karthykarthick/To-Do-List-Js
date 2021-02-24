@@ -54,7 +54,10 @@ var Project = /*#__PURE__*/function () {
   }]);
 
   return Project;
-}();
+}(); // module.exports = {
+//   Project: Project
+// };
+
 
 
 
@@ -357,20 +360,7 @@ var getBtns = function getBtns(classElemnt) {
   return document.querySelectorAll("".concat(classElemnt));
 };
 
- // module.exports = {
-//   storeProject: storeProject,
-//   storeTodos: storeTodos,
-//   renderProjects: renderProjects,
-//   sanitizeId: sanitizeId,
-//   getProjectIndex: getProjectIndex,
-//   deleteElementFromDOM: deleteElementFromDOM,
-//   displayTodoForm: displayTodoForm,
-//   hideTodoForm: hideTodoForm,
-//   renderTodos: renderTodos,
-//   getBtns: getBtns,
-//   getTaskIndex: getTaskIndex,
-//   updateTodo: updateTodo,
-// };
+ // module.exports = sanitizeId
 
 /***/ }),
 

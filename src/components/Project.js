@@ -25,3 +25,7 @@ export default class Project {
     setLocalStorage();
   }
 }
+
+// module.exports = {
+//   Project: Project
+// };
