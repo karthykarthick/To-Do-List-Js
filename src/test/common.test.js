@@ -1,56 +1,65 @@
 
-// import sanitizeId from './../components/common';
-// // displayTodoForm,
-// // hideTodoForm,
-// // getProjectIndex
+import {
+  sanitizeId,
+  displayTodoForm,
+  hideTodoForm,
+  storeProject
+} from './../components/common';
 
+describe('Sanitize method', () => {
+  const text = sanitizeId('prueba 1')
 
+  it('should return the sanitized word', () => {
+    expect(text).toBe('prueba1')
+  });
 
-// afterEach(() => {
-//   jest.clearAllMocks()
-// })
+  it('should should not return the same text', () => {
+    expect(text).not.toBe('prueba 1')
+  });
+})
 
-// describe('Sanitize method', () => {
-//   const text = sanitizeId('prueba 1')
+describe('Display todo Form', () => {
+  const element = document.createElement('div')
 
-//   it('should return the sanitized word', () => {
-//     expect(text).toBe('prueba1')
-//   });
+  it('Should add show class to the element', () => {
+    displayTodoForm(element)
+    expect(element.getAttribute('class')).toBe('show')
+  })
 
-//   it('should should not return the same text', () => {
-//     expect(text).not.toBe('prueba 1')
-//   });
-// })
+  it('Should not have the class hide', () => {
+    displayTodoForm(element)
+    expect(element.getAttribute('class')).not.toBe('hide')
+  })
+})
 
-// describe('Display todo Form', () => {
-//   const element = document.createElement('div')
+describe('Hide To-do form', () => {
+  const element = document.createElement('div')
+  element.classList.add('show')
 
-//   it('Should add show class to the element', () => {
-//     displayTodoForm(element)
-//     expect(element.getAttribute('class')).toBe('show')
-//   })
+  it('Should add show class to the element', () => {
+    hideTodoForm(element)
+    expect(element.getAttribute('class')).not.toBe('show')
+  })
+})
 
-//   it('Should not have the class hide', () => {
-//     displayTodoForm(element)
-//     expect(element.getAttribute('class')).not.toBe('hide')
-//   })
-// })
+describe('Store project', () => {
+  const store = []
+  storeProject('prueba', store)
 
-// describe('Hide To-do form', () => {
-//   const element = document.createElement('div')
-//   element.classList.add('show')
+  it('should have an object', () => {
+    expect(store.length).toEqual(1)
+  });
 
-//   it('Should add show class to the element', () => {
-//     hideTodoForm(element)
-//     expect(element.getAttribute('class')).not.toBe('show')
-//   })
-// })
+  it('should not have more than one object', () => {
+    expect(store.length).not.toEqual(2)
+  });
 
-// // describe('Get Project index', () => {
-// //   const store = [{ projectName: 'test' }]
-// //   const idx = getProjectIndex('test')
+  it('should have an object key called todos', () => {
+    expect(typeof store[0].todos).toBe('object')
+  });
 
-// //   it('should return the index of the project', () => {
-// //     expect(idx).toEqual(0)
-// //   });
-// // })
+  it('should have an object key with the name prueba', () => {
+    expect(store[0].projectName).toBe('prueba')
+  });
+
+})

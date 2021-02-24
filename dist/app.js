@@ -48,16 +48,13 @@ var Project = /*#__PURE__*/function () {
   }, {
     key: "saveProject",
     value: function saveProject() {
-      (0,_common__WEBPACK_IMPORTED_MODULE_1__.storeProject)(this.name);
+      (0,_common__WEBPACK_IMPORTED_MODULE_1__.storeProject)(this.name, _storage__WEBPACK_IMPORTED_MODULE_0__.store);
       (0,_storage__WEBPACK_IMPORTED_MODULE_0__.setLocalStorage)();
     }
   }]);
 
   return Project;
-}(); // module.exports = {
-//   Project: Project
-// };
-
+}();
 
 
 
@@ -290,8 +287,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./storage */ "./src/components/storage.js");
 
 
-var storeProject = function storeProject(projectName) {
-  _storage__WEBPACK_IMPORTED_MODULE_0__.store.push({
+var storeProject = function storeProject(projectName, storage) {
+  storage.push({
     projectName: projectName,
     todos: []
   });
@@ -360,7 +357,7 @@ var getBtns = function getBtns(classElemnt) {
   return document.querySelectorAll("".concat(classElemnt));
 };
 
- // module.exports = sanitizeId
+
 
 /***/ }),
 

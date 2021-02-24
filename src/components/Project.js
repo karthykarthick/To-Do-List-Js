@@ -21,11 +21,7 @@ export default class Project {
   }
 
   saveProject() {
-    storeProject(this.name);
+    storeProject(this.name, store);
     setLocalStorage();
   }
 }
-
-// module.exports = {
-//   Project: Project
-// };

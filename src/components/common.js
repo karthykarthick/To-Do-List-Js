@@ -1,7 +1,7 @@
 import { store, currentIndex } from './storage';
 
-const storeProject = (projectName) => {
-  store.push({
+const storeProject = (projectName, storage) => {
+  storage.push({
     projectName,
     todos: [],
   });
@@ -87,5 +87,3 @@ export {
   getTaskIndex,
   updateTodo,
 };
-
-// module.exports = sanitizeId
