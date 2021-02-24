@@ -4,8 +4,12 @@ import {
   displayTodoForm,
   hideTodoForm,
   storeProject,
-  storeTodos
+  storeTodos,
+  getProjectIndex,
+  getTaskIndex
 } from './../components/common';
+
+import { store, currentIndex } from './../components/storage';
 
 describe('Sanitize method', () => {
   const text = sanitizeId('prueba 1')
@@ -112,5 +116,53 @@ describe('store todos', () => {
 
   it('should not have description of described', () => {
     expect(store[0].todos[0].priority).not.toBe('described')
+  })
+})
+
+describe('Get project index', () => {
+  storeProject('prueba1', store);
+  storeProject('prueba2', store);
+
+  it('should return the idx of the id given', () => {
+    const idx = getProjectIndex('prueba1');
+    expect(idx).toEqual(0);
+  })
+
+  it('should return the idx of the id given', () => {
+    const idx = getProjectIndex('prueba2');
+    expect(idx).toEqual(1);
+  })
+
+  it('should not return 3', () => {
+    const idx = getProjectIndex('prueba2');
+    expect(idx).not.toEqual(3);
+  })
+
+  it('should return -1', () => {
+    const idx = getProjectIndex('prueba3');
+    expect(idx).toEqual(-1);
+  })
+})
+
+describe('Get Task Index', () => {
+  storeProject('prueba1', store);
+  storeProject('prueba2', store);
+  currentIndex.id = 0
+  storeTodos('task1', 'task1 description', '12/12/12', 'high', store, 0);
+  storeTodos('task2', 'task2 description', '12/12/12', 'low', store, 0);
+
+  it('Should return 0', () => {
+    const idx = getTaskIndex('task1');
+    expect(idx).toEqual(0);
+  })
+
+  it('Should return 1', () => {
+    const idx = getTaskIndex('task2');
+    expect(idx).toEqual(1);
+  })
+
+  it('Should return -1', () => {
+    const idx = getTaskIndex('task3');
+    expect(idx).not.toEqual(0);
   })
 })
