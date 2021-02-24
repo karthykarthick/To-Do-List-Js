@@ -6,7 +6,8 @@ import {
   storeProject,
   storeTodos,
   getProjectIndex,
-  getTaskIndex
+  getTaskIndex,
+  getBtns
 } from './../components/common';
 
 import { store, currentIndex } from './../components/storage';
@@ -165,4 +166,20 @@ describe('Get Task Index', () => {
     const idx = getTaskIndex('task3');
     expect(idx).not.toEqual(0);
   })
+})
+
+describe('Getbuttons', () => {
+  document.body.innerHTML = `
+    <button class="btn">btn1</button>
+    <button class="btn">btn1</button>
+    <button class="btn">btn1</button>
+  `
+  const btns = getBtns('.btn');
+  it('should store all the btns with the class passed', () => {
+    expect(typeof btns).toBe('object')
+  });
+
+  it('should be the class btn', () => {
+    expect(btns[0].getAttribute('class')).toBe('btn')
+  });
 })
