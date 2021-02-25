@@ -1,13 +1,13 @@
 import { store, currentIndex } from './storage';
 
-const storeProject = (projectName) => {
-  store.push({
+const storeProject = (projectName, storage) => {
+  storage.push({
     projectName,
     todos: [],
   });
 };
 
-const storeTodos = (title, description, date, priority) => store[currentIndex.id]
+const storeTodos = (title, description, date, priority, storage, projectId) => storage[projectId]
   .todos
   .push(
     {

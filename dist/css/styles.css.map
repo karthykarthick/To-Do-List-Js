@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://To-Do-List-Js/./src/scss/styles.scss"],"names":[],"mappings":"AAAA,qBACE,YAAa,CAGf,MACE,eAAgB","file":"./css/styles.css","sourcesContent":[".todo-form-container {\n  display: none;\n}\n\n.show {\n  display: initial;\n}"],"sourceRoot":""}
